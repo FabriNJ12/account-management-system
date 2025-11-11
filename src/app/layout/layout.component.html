@@ -1,0 +1,141 @@
+<div class="flex flex-col md:flex-row font-sans w-screen divide-x h-dvh overflow-hidden  ">
+
+  <!-- ASIDE NAVBAR ESCRITORIO -->
+  <aside [ngClass]="{'w-[60px]':!expandSideBar, 'w-[220px] lg:w-60 xl:w-[280px]':expandSideBar}" class="md:flex flex-col hidden bg-[#0e1624] items-center justify-between shadow-md px-3 gap-5 transition-all duration-400 ">
+
+    <main class="w-full flex flex-col ">
+
+      <header (click)="setLocalStorage()" [ngClass]="{'pl-[3px]':!expandSideBar}"  class="w-full flex  mt-6 text-white gap-2 mb-8  transition-all duration-300">
+        <button class="flex flex-row cursor-pointer gap-2 outline-none"><svg class="pointer-events-none"  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-brand-dribbble"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.384 14.38a22.877 22.877 0 0 1 1.056 4.863l.064 .644l.126 1.431a10 10 0 0 1 -9.15 -.98l2.08 -2.087l.246 -.24c1.793 -1.728 3.41 -2.875 5.387 -3.566l.191 -.065zm6.09 -.783l.414 .003l.981 .014a9.997 9.997 0 0 1 -4.319 6.704l-.054 -.605c-.18 -2.057 -.55 -3.958 -1.163 -5.814c1.044 -.182 2.203 -.278 3.529 -.298l.611 -.004zm-7.869 -3.181a24.91 24.91 0 0 1 1.052 2.098c-2.276 .77 -4.142 2.053 -6.144 3.967l-.355 .344l-2.236 2.24a10 10 0 0 1 -2.917 -6.741l-.005 -.324l.004 -.25h1.096l.467 -.002c3.547 -.026 6.356 -.367 8.938 -1.295l.1 -.037zm9.388 1.202l-1.515 -.02c-1.86 -.003 -3.45 .124 -4.865 .402a26.112 26.112 0 0 0 -1.163 -2.38c1.393 -.695 2.757 -1.597 4.179 -2.75l.428 -.354l.816 -.682a10 10 0 0 1 2.098 5.409l.022 .375zm-14.663 -8.46l1.266 1.522c1.145 1.398 2.121 2.713 2.949 3.985c-2.26 .766 -4.739 1.052 -7.883 1.081l-.562 .004h-.844a10 10 0 0 1 5.074 -6.593zm9.67 .182c.53 .306 1.026 .657 1.483 1.046l-1.025 .857c-1.379 1.128 -2.688 1.993 -4.034 2.649c-.89 -1.398 -1.943 -2.836 -3.182 -4.358l-.474 -.574l-.485 -.584a10 10 0 0 1 7.717 .964z" /></svg>
+        <p [ngClass]="{'opacity-0':!expandSideBar, 'opacity-100':expandSideBar}" class="font-medium text-lg duration-300 whitespace-nowrap pointer-events-none">Company Name</p></button>
+      </header>
+
+      <button (click)="navigation('Movimientos')"  [ngClass]="{ 'px-2':expandSideBar, 'pl-[5px]':!expandSideBar, 'bg-[#1a222f]! text-white!': currentModule === 'Movimientos'}" class="cursor-pointer duration-200 hover:scale-101 font-semibold py-2 bg-transparent text-gris-200 w-full rounded-md flex flex-row justify-start  items-center hover:bg-celeste-200 hover:text-celeste-800 outline-none mb-4"> 
+               <div class="flex flex-row gap-1 ml-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-cash-register mt-0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 15h-2.5c-.398 0 -.779 .158 -1.061 .439c-.281 .281 -.439 .663 -.439 1.061c0 .398 .158 .779 .439 1.061c.281 .281 .663 .439 1.061 .439h1c.398 0 .779 .158 1.061 .439c.281 .281 .439 .663 .439 1.061c0 .398 -.158 .779 -.439 1.061c-.281 .281 -.663 .439 -1.061 .439h-2.5" /><path d="M19 21v1m0 -8v1" /><path d="M13 21h-7c-.53 0 -1.039 -.211 -1.414 -.586c-.375 -.375 -.586 -.884 -.586 -1.414v-10c0 -.53 .211 -1.039 .586 -1.414c.375 -.375 .884 -.586 1.414 -.586h2m12 3.12v-1.12c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-2" /><path d="M16 10v-6c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-4c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414v6m8 0h-8m8 0h1m-9 0h-1" /><path d="M8 14v.01" /><path d="M8 17v.01" /><path d="M12 13.99v.01" /><path d="M12 17v.01" /></svg>
+                    <p  class="transition-all duration-300 origin-left whitespace-nowrap" [ngClass]="{'opacity-0  ml-0 scale-80':!expandSideBar, 'opacity-100  ml-1 scale-100':expandSideBar}">Movimientos</p>
+                </div>  
+      </button>
+
+      <button (click)="navigation('Alta Clientes')"  [ngClass]="{ 'px-2':expandSideBar, 'pl-[5px]':!expandSideBar, 'bg-[#1a222f]! text-white!': currentModule === 'Alta Clientes'}" class="cursor-pointer duration-200 hover:scale-101 font-semibold py-2 bg-transparent text-gris-200 w-full rounded-md flex flex-row justify-start  items-center hover:bg-celeste-200 hover:text-celeste-800 outline-none mb-4"> 
+                <div class="flex flex-row gap-1 ml-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus mt-0.5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
+                    <p  class="transition-all duration-300 origin-left whitespace-nowrap" [ngClass]="{'opacity-0  ml-0 scale-80':!expandSideBar, 'opacity-100  ml-1 scale-100':expandSideBar}">Alta Clientes</p>
+                </div>  
+      </button>
+
+     
+
+     
+
+    
+    </main>
+
+    <footer class="w-full flex mb-6">
+      <button (click)="showModal = !showModal"  [ngClass]="{ 'px-2':expandSideBar, 'pl-[5px]':!expandSideBar}" class="cursor-pointer duration-200 hover:scale-101 font-semibold py-2 bg-gris-50 text-gris-200 w-full rounded-md flex flex-row justify-between  items-center hover:bg-celeste-200 hover:text-celeste-800 outline-none"> 
+              <div class="flex flex-row gap-1 ml-0.5">
+                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+                  <p  class="transition-all duration-300 origin-left whitespace-nowrap" [ngClass]="{'opacity-0  ml-0 scale-80':!expandSideBar, 'opacity-100  ml-1 scale-100':expandSideBar}">Cerrar sesión</p>
+              </div> 
+        </button>
+    </footer>
+    
+  </aside>
+
+  <header class="flex md:hidden w-full h-[60px] bg-[#0e1624] items-center px-6 justify-between border-b border-divideDM z-200">
+
+    <button (click)="toggleNav()" class="relative w-8 h-8 flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 group "aria-label="Abrir menú">
+      <!-- Línea superior -->
+      <span class="absolute h-0.5 w-6 bg-white rounded transition-all duration-300 ease-in-out" [ngClass]="{'rotate-45 translate-y-0': menuOpen, '-translate-y-1.5': !menuOpen}"></span>
+
+      <!-- Línea inferior -->
+      <span class="absolute h-0.5 w-6 bg-white rounded transition-all duration-300 ease-in-out" [ngClass]="{'-rotate-45 translate-y-0': menuOpen, 'translate-y-1.5': !menuOpen}"></span>
+    </button>
+
+
+    <span class="flex flex-row-reverse gap-2 justify-center items-center text-white">
+      <svg class="pointer-events-none"  xmlns="http://www.w3.org/2000/svg"  width="30"  height="30"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-brand-dribbble"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.384 14.38a22.877 22.877 0 0 1 1.056 4.863l.064 .644l.126 1.431a10 10 0 0 1 -9.15 -.98l2.08 -2.087l.246 -.24c1.793 -1.728 3.41 -2.875 5.387 -3.566l.191 -.065zm6.09 -.783l.414 .003l.981 .014a9.997 9.997 0 0 1 -4.319 6.704l-.054 -.605c-.18 -2.057 -.55 -3.958 -1.163 -5.814c1.044 -.182 2.203 -.278 3.529 -.298l.611 -.004zm-7.869 -3.181a24.91 24.91 0 0 1 1.052 2.098c-2.276 .77 -4.142 2.053 -6.144 3.967l-.355 .344l-2.236 2.24a10 10 0 0 1 -2.917 -6.741l-.005 -.324l.004 -.25h1.096l.467 -.002c3.547 -.026 6.356 -.367 8.938 -1.295l.1 -.037zm9.388 1.202l-1.515 -.02c-1.86 -.003 -3.45 .124 -4.865 .402a26.112 26.112 0 0 0 -1.163 -2.38c1.393 -.695 2.757 -1.597 4.179 -2.75l.428 -.354l.816 -.682a10 10 0 0 1 2.098 5.409l.022 .375zm-14.663 -8.46l1.266 1.522c1.145 1.398 2.121 2.713 2.949 3.985c-2.26 .766 -4.739 1.052 -7.883 1.081l-.562 .004h-.844a10 10 0 0 1 5.074 -6.593zm9.67 .182c.53 .306 1.026 .657 1.483 1.046l-1.025 .857c-1.379 1.128 -2.688 1.993 -4.034 2.649c-.89 -1.398 -1.943 -2.836 -3.182 -4.358l-.474 -.574l-.485 -.584a10 10 0 0 1 7.717 .964z" /></svg>
+    <p class="font-medium text-lg duration-300 whitespace-nowrap pointer-events-none">Control movimientos</p>
+    </span>
+  </header>
+
+
+  <main  class="flex-1 overflow-x-hidden relative">
+
+    <!-- ASIDE NAVBAR MOBILE -->
+    <aside [ngClass]="{'w-0 px-0':!menuOpen, 'w-60 px-3':menuOpen}"  class="fixed top-0 left-0 h-dvh  bg-[#0e1624] border-r border-divideDM shadow-md z-50 transform transition-all duration-300 will-change-transform flex flex-col justify-between items-center px-3 gap-5">
+
+      <main class="w-full flex flex-col mt-20">
+
+        <button  (click)="navigation('Movimientos')"  [ngClass]="{'scale-86 opacity-0 pointer-events-none':!menuOpen, 'scale-100 opacity-100':menuOpen, 'bg-[#1a222f]! text-white!':currentModule==='Movimientos'}"  class="cursor-pointer  hover:scale-101 font-semibold py-2 bg-transparent text-gris-200 w-full rounded-md flex flex-row justify-between  items-center md:hover:bg-celeste-200 md:hover:text-celeste-800 active:bg-celeste-200 active:text-celeste-800 outline-none transition-all mb-4 origin-bottom-left duration-300"> 
+                <div class="flex flex-row gap-1 px-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-cash-register"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 15h-2.5c-.398 0 -.779 .158 -1.061 .439c-.281 .281 -.439 .663 -.439 1.061c0 .398 .158 .779 .439 1.061c.281 .281 .663 .439 1.061 .439h1c.398 0 .779 .158 1.061 .439c.281 .281 .439 .663 .439 1.061c0 .398 -.158 .779 -.439 1.061c-.281 .281 -.663 .439 -1.061 .439h-2.5" /><path d="M19 21v1m0 -8v1" /><path d="M13 21h-7c-.53 0 -1.039 -.211 -1.414 -.586c-.375 -.375 -.586 -.884 -.586 -1.414v-10c0 -.53 .211 -1.039 .586 -1.414c.375 -.375 .884 -.586 1.414 -.586h2m12 3.12v-1.12c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-2" /><path d="M16 10v-6c0 -.53 -.211 -1.039 -.586 -1.414c-.375 -.375 -.884 -.586 -1.414 -.586h-4c-.53 0 -1.039 .211 -1.414 .586c-.375 .375 -.586 .884 -.586 1.414v6m8 0h-8m8 0h1m-9 0h-1" /><path d="M8 14v.01" /><path d="M8 17v.01" /><path d="M12 13.99v.01" /><path d="M12 17v.01" /></svg>
+                    <p  class="transition-all duration-300 origin-left whitespace-nowrap ml-1" >Movimientos</p>
+                </div> 
+        </button>
+
+        <button  (click)="navigation('Alta Clientes')"  [ngClass]="{'scale-86 opacity-0 pointer-events-none':!menuOpen, 'scale-100 opacity-100':menuOpen,'bg-[#1a222f]! text-white!':currentModule==='Alta Clientes'}"  class="cursor-pointer  hover:scale-101 font-semibold py-2 bg-transparent text-gris-200 w-full rounded-md flex flex-row justify-between  items-center md:hover:bg-celeste-200 md:hover:text-celeste-800 active:bg-celeste-200 active:text-celeste-800 outline-none transition-all mb-4 origin-bottom-left duration-300"> 
+                <div class="flex flex-row gap-1 px-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M16 19h6" /><path d="M19 16v6" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4" /></svg>
+                    <p  class="transition-all duration-300 origin-left whitespace-nowrap ml-1" >Alta Clientes</p>
+                </div> 
+        </button>
+
+       
+
+        
+      </main>
+
+      <!-- CERRAR SESION -->
+      <footer class="w-full flex mb-6">
+        <button [ngClass]="{'scale-86 opacity-0 pointer-events-none':!menuOpen, 'scale-100 opacity-100':menuOpen}"  class="cursor-pointer duration-200 hover:scale-101 font-semibold py-2 bg-gris-50 text-gris-200 w-full rounded-md flex flex-row justify-between  items-center hover:bg-celeste-200 hover:text-celeste-800 outline-none transition-all origin-left "> 
+                <div class="flex flex-row gap-1 px-2">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+                    <p  class="transition-all duration-300 origin-left whitespace-nowrap ml-1" >Cerrar sesión</p>
+                </div> 
+          </button>
+      </footer>
+      
+    </aside>
+    <div [ngClass]="{'opacity-0 pointer-events-none':!menuOpen}" class="w-screen h-full inset-0 md:hidden bg-black/30 backdrop-blur-[2px] z-9 fixed top-0 duration-200 "></div>
+    <!-- RUTAS -->
+    <router-outlet></router-outlet>
+
+
+
+
+    <!-- modal cerrar sesion -->
+  <div class="font-inter "> 
+      <div role="dialog" aria-modal="true" aria-labelledby="dialog-title" class="relative z-10" [ngClass]="{'ease-in duration-300 opacity-100 pointer-events-auto':showModal, 'ease-in duration-200 opacity-0 pointer-events-none':!showModal }">
+        <div aria-hidden="true" class="fixed inset-0 bg-gray-500/75 transition-opacity"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0 ">
+            <div class="relative transform  rounded-lg  text-left shadow-xl transition-all sm:my-8 w-auto" [ngClass]="{'ease-out duration-300 opacity-100 translate-y-0 sm:scale-100 pointer-events-auto':showModal, 'ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 pointer-events-none':!showModal }" >
+              <div class="bg-white p-6 flex flex-col gap-6 max-w-fit mx-auto rounded-xl shadow-lg min-w-[300px] relative">
+                <!-- CONTENIDO AQUI -->
+                <div class="flex flex-col items-center text-center gap-2">
+                  <p class="text-red-500 font-bold text-xl rounded-md bg-red-50 p-2"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-alert-triangle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9v4" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" /><path d="M12 16h.01" /></svg></p>
+                  <p class="text-gray-800">¿Estás seguro de que deseas cerrar sesión?</p>
+                </div>
+
+                <div class="flex flex-row justify-center gap-10 mt-2">
+                  <button (click)="showModal = !showModal" type="button" class="cursor-pointer duration-200 hover:scale-105 inline-flex justify-center rounded-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 py-2.5 px-5 shadow-xs focus:outline-none ">
+                    Cancelar
+                  </button>
+
+                  <button (click)="LogOut()" type="button" class="inline-flex justify-center rounded-lg bg-gray-900 text-sm font-medium text-white shadow-xs duration-200 hover:bg-gray-800 hover:scale-105 cursor-pointer py-2.5 px-5 focus:outline-none ">
+                    Confirmar
+                  </button>
+                </div>
+              </div>
+
+            
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+ 
+  </main>
+</div>

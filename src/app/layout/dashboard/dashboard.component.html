@@ -1,0 +1,75 @@
+<main class="w-full h-dvh bg-BGblack font-inter flex justify-start flex-col items-center gap-4">
+
+ <section class=" flex justify-between mt-5 mx-4">
+    <div class="flex flex-row *:text-gray-400 divide-x divide-divideDM border border-divideDM rounded-lg *:px-4 *:py-1 *:hover:bg-accentDM *:cursor-pointer *:transition-colors duration-200">
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-filter"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" /></svg>
+        </button>
+        
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+        </button>
+
+        <button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-caret-up-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 10l-6 -6l-6 6h12" /><path d="M18 14l-6 6l-6 -6h12" /></svg>
+        </button>
+    </div>
+    <div class="relative w-[55%] max-w-xs">
+        <!-- Icono de búsqueda -->
+        <svg class="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+        </svg>
+
+        <!-- Input -->
+        <input [(ngModel)]="search" (input)="searchFuncion()"  type="text" placeholder="Buscar" class="w-full pl-8 pr-2 py-1 rounded-md text-white placeholder:text-gray-400 border border-divideDM focus:border-divideDM focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all duration-100">
+    </div>
+
+ </section>
+<div class="overflow-x-auto w-full px-4 rounded-xl ">
+  <table class="min-w-full text-sm text-left text-gray-300 dark:text-gray-300 border rounded-xl border-accentDM border-separate border-spacing-0 overflow-hidden">
+    <!-- Headers -->
+    <thead class="bg-accentDM text-[#e9ebed] uppercase text-xs ">
+      <tr class="*:border-b *:border-accentDM">
+        <th scope="col" class="px-3 py-3">Cliente</th>
+        <th scope="col" class="px-3 py-3">Deuda</th>
+        <th scope="col" class="px-3 py-3">Últ. pago</th>
+        <th scope="col" class="px-3 py-3">Estado</th>
+      </tr>
+    </thead>
+
+    <!-- Body -->
+    <tbody class="divide-y divide-divideDM">
+      <tr *ngIf="clients.length === 0" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
+        <td class="px-2" colspan="5"><div class="h-5 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+      </tr>
+
+    
+      <!-- Fila clickeable -->
+       <ng-container *ngFor="let client of clients">
+        <ng-container *ngIf="client.lastpay">
+            <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " (click)="sendUser(client)" >
+                <td class="px-4 py-3 truncate max-w-[100px]">{{client.name}}</td>
+                <td class="px-4 py-3">${{client.debt|number}}</td>
+                <td class="px-4 py-3">{{client.lastpay |date:'MM/dd'}}</td>
+                <td  *ngIf="client.debt < 1" class="px-4 py-3"><p class="bg-green-500/10 text-center w-fit  border border-green-500/50 rounded-md text-green-400 py-1 px-2 text-sm">Pagado</p></td>
+                <td *ngIf="client.debt > 1"  class="px-4 py-3"><p class=" text-center w-fit px-2 border bg-red-500/15 border-red-500/50 text-red-400 rounded-md  py-1  text-sm">Impago</p></td>
+            </tr>
+        </ng-container>
+            
+       </ng-container>
+      
+
+    
+
+      <!-- Agregar más filas dinámicamente con *ngFor -->
+    </tbody>
+  </table>
+
+   
+</div>
+
+
+
+<app-client-info [ShowModal]="ShowModal" (emitSignal)="ShowModal=$event" (realoadSignal)="reload() "></app-client-info>
+
+</main>

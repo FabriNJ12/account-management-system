@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@theme{
+    --font-inter:"inter", sans-serif;
+    --color-BGwhite:#ffffff;
+    --color-accent:#f0f2f5;
+    --color-default:#748699;
+    --color-strong:#212225;
+    --color-celeste-200:#1a222f;
+    --color-celeste-800:#ffffff;
+    --color-gris-200:#99a1af;
+    --color-gris-50:#1a222f;
+    --color-text-bold:#11234e;
+    --color-text-normal:#37394c;
+    --color-buttons:#7381b7;
+
+    /* new proyect colors */
+
+    --color-BGblack:#101828;
+    --color-accentDM:#172130;
+    --color-divideDM:#27303e;
+}
+
+/* en styles.css */
+.input-no-spin::-webkit-outer-spin-button,
+.input-no-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-no-spin {
+  -moz-appearance: textfield;
+}
+
+
+.scroll-transparent::-webkit-scrollbar {
+  width: 8px; /* ancho de la barra (vertical) */
+  height: 8px; /* alto de la barra (horizontal) */
+}
+
+.scroll-transparent::-webkit-scrollbar-track {
+  background: transparent; /* el “fondo” de la barra */
+}
+
+.scroll-transparent::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.15); /* color del thumb */
+  border-radius: 9999px; /* full rounded */
+}
+
+.scroll-transparent::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Firefox */
+.scroll-transparent {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
