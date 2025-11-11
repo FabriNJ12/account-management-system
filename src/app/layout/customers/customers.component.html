@@ -60,50 +60,57 @@
 
   <!-- GRID -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ng-container *ngIf="clients">
+      <div *ngIf="clients.length < 1" class="col-span-full flex flex-col items-center justify-center py-16 px-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex justify-center items-center mr-3 text-gray-500 mb-4 opacity-50 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+        </svg>
+        <p class="text-gray-400 font-medium mb-1">Sin resultados</p>
+      </div>
+    </ng-container>
+    
     <!-- CARD -->
-    <div (click)="editCustomer(client)"  *ngFor="let client of clients; let i = index" 
-  class="bg-accentDM/10 rounded-2xl border border-divideDM flex flex-col items-center text-center shadow-[0_0_20px_2px_rgba(255,255,255,0.03)] hover:shadow-[0_0_25px_3px_rgba(255,255,255,0.06)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 cursor-pointer select-none  p-4" >
+    <div (click)="editCustomer(client)"  *ngFor="let client of clients; let i = index" class="bg-accentDM/10 rounded-2xl border border-divideDM flex flex-col items-center text-center shadow-[0_0_20px_2px_rgba(255,255,255,0.03)] hover:shadow-[0_0_25px_3px_rgba(255,255,255,0.06)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 cursor-pointer select-none  p-4" >
 
-  <!-- Header -->
-  <div class="w-full  flex justify-between text-xs text-gray-400 mb-2">
-    <span class="font-medium">#{{ client.id }}</span>
-    <span class="opacity-70">Cliente</span>
-  </div>
+    <!-- Header -->
+    <div class="w-full  flex justify-between text-xs text-gray-400 mb-2">
+      <span class="font-medium">#{{ client.id }}</span>
+      <span class="opacity-70">Cliente</span>
+    </div>
 
-  <!-- Avatar -->
-  <div class="relative mb-3">
-    <div [ngClass]="getColorCard(i)" class="w-16 h-16 rounded-full border flex items-center justify-center shadow-[0_0_25px_4px_rgba(255,255,255,0.08)] "
-        >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14c3.866 0 7 1.567 7 3.5V19a1 1 0 01-1 1H6a1 1 0 01-1-1v-1.5C5 15.567 8.134 14 12 14zm0-2a4 4 0 100-8 4 4 0 000 8z" />
+    <!-- Avatar -->
+    <div class="relative mb-3">
+      <div [ngClass]="getColorCard(i)" class="w-16 h-16 rounded-full border flex items-center justify-center shadow-[0_0_25px_4px_rgba(255,255,255,0.08)] " >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14c3.866 0 7 1.567 7 3.5V19a1 1 0 01-1 1H6a1 1 0 01-1-1v-1.5C5 15.567 8.134 14 12 14zm0-2a4 4 0 100-8 4 4 0 000 8z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Nombre -->
+    <h3 class="text-base font-semibold text-gray-200 tracking-wide mb-1">{{ client.name }}</h3>
+
+    <!-- Teléfono -->
+    <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M2 5.5A2.5 2.5 0 014.5 3h1A2.5 2.5 0 018 5.5V7a1 1 0 01-1 1h-.5c-.828 0-1.5.672-1.5 1.5v1c0 4.142 3.358 7.5 7.5 7.5h1c.828 0 1.5-.672 1.5-1.5V16a1 1 0 011-1h1.5A2.5 2.5 0 0120 17.5v1A2.5 2.5 0 0117.5 21h-1C8.492 21 3 15.508 3 8.5v-1A2.5 2.5 0 012 5.5z" />
       </svg>
+      <span>{{ client.tel }}</span>
+    </div>
+
+    <!-- Footer: Compras / Pagos -->
+    <div class="w-full flex justify-between mt-auto text-sm font-medium text-gray-300 border-t border-divideDM pt-3">
+      <div class="flex flex-col items-center w-1/2 border-r border-divideDM">
+        <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Compras</span>
+        <span class="text-red-400 font-semibold">${{ client.total_sales| number}}</span>
+      </div>
+      <div class="flex flex-col items-center w-1/2">
+        <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Pagos</span>
+        <span class="text-green-400 font-semibold">${{ client.total_pays| number}}</span>
+      </div>
     </div>
   </div>
-
-  <!-- Nombre -->
-  <h3 class="text-base font-semibold text-gray-200 tracking-wide mb-1">{{ client.name }}</h3>
-
-  <!-- Teléfono -->
-  <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-        d="M2 5.5A2.5 2.5 0 014.5 3h1A2.5 2.5 0 018 5.5V7a1 1 0 01-1 1h-.5c-.828 0-1.5.672-1.5 1.5v1c0 4.142 3.358 7.5 7.5 7.5h1c.828 0 1.5-.672 1.5-1.5V16a1 1 0 011-1h1.5A2.5 2.5 0 0120 17.5v1A2.5 2.5 0 0117.5 21h-1C8.492 21 3 15.508 3 8.5v-1A2.5 2.5 0 012 5.5z" />
-    </svg>
-    <span>{{ client.tel }}</span>
-  </div>
-
-  <!-- Footer: Compras / Pagos -->
-  <div class="w-full flex justify-between mt-auto text-sm font-medium text-gray-300 border-t border-divideDM pt-3">
-    <div class="flex flex-col items-center w-1/2 border-r border-divideDM">
-      <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Compras</span>
-      <span class="text-red-400 font-semibold">${{ client.total_sales| number}}</span>
-    </div>
-    <div class="flex flex-col items-center w-1/2">
-      <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Pagos</span>
-      <span class="text-green-400 font-semibold">${{ client.total_pays| number}}</span>
-    </div>
-  </div>
-    </div>
 
     <!-- skeleton loader -->
     <ng-container *ngIf="!clients">
