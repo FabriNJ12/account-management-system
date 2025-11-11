@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 
 #ignorar claves supabase
-system\src\app\core\Supabase
+src/app/core/Supabase
+/env
