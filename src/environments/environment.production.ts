@@ -1,18 +1,25 @@
-declare global {
-  interface ImportMetaEnv {
-    NG_APP_SUPABASE_URL: string;
-    NG_APP_SUPABASE_KEY: string;
-  }
+// declare global {
+//   interface ImportMetaEnv {
+//     NG_APP_SUPABASE_URL: string;
+//     NG_APP_SUPABASE_KEY: string;
+//   }
 
-  interface ImportMeta {
-    readonly env: ImportMetaEnv;
-  }
-}
+//   interface ImportMeta {
+//     readonly env: ImportMetaEnv;
+//   }
+// }
+
+// export const environment = {
+//   production: true,
+//   supabaseUrl: import.meta.env.NG_APP_SUPABASE_URL,
+//   supabaseKey: import.meta.env.NG_APP_SUPABASE_KEY,
+// };
+
 
 export const environment = {
-  production: true,
-  supabaseUrl: import.meta.env.NG_APP_SUPABASE_URL,
-  supabaseKey: import.meta.env.NG_APP_SUPABASE_KEY,
+  production: false,
+  supabaseUrl: 'https://fprhrkjlspgvdqeolipm.supabase.co',
+  supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZwcmhya2psc3BndmRxZW9saXBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE3MDQ2NDAsImV4cCI6MjA3NzI4MDY0MH0.AIdYxHDH91OxY5loU5sNiaJzCR7YWV4pCTLLs1LO1h8'
 };
 
-export {};
+
