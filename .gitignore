@@ -43,4 +43,4 @@ Thumbs.db
 
 #ignorar claves supabase
 src/app/core/Supabase
-/env
+/src/env
