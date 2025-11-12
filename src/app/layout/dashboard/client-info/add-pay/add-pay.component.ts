@@ -41,6 +41,7 @@ export class AddPayComponent {
   Description: string | null = null;
   alert: boolean = false;
   Status: Status = 'nothing';
+  AlertMsg:string = 'Debe completar todos los campos.'
 
   /* ---------- Dropdown ---------- */
   showDropDown: boolean = false;
@@ -80,6 +81,7 @@ export class AddPayComponent {
     setTimeout(() => {
       this.reasonSelected = 'Seleccionar método';
       this.amount = null;
+      this.alert = false
     }, 500);
   }
 
@@ -103,10 +105,19 @@ export class AddPayComponent {
     if (
       this.reasonSelected === 'Seleccionar método' ||
       this.amount === null ||
-      this.amount === 0
+      this.amount === 0 || !this.client
     ) {
       this.alert = true;
+      this.AlertMsg = 'Debe completar todos los campos.'
       return;
+    }
+
+    
+
+    if(this.amount >this.client?.debt){
+      this.alert =  true
+      this.AlertMsg = 'Está ingresando un pago mayor a la deuda.'
+      return
     }
 
     this.alert = false;

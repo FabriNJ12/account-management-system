@@ -44,7 +44,7 @@
                       </button>
 
                       <span *ngIf="alert===true" class="duration-300 px-2 transition-all w-fit ring ring-[#4b1d2c] flex flex-row text-red-400  py-1 justify-center items-center bg-[#341b2a] mt-3 rounded-md"><svg   viewBox="0 0 20 20" height="20" fill="currentColor" data-slot="icon" aria-hidden="true" class="hwp hxe"><path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                        <p class=" ml-1.5 text-sm font-thin text-[#ffc9bf] whitespace-nowrap pointer-events-none">Debe completar todos los campos.</p>
+                        <p class=" ml-1.5 text-sm font-thin text-[#ffc9bf] whitespace-nowrap pointer-events-none">{{AlertMsg}}</p>
                       </span>
                   </div>
 
