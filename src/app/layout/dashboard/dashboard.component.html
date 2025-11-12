@@ -61,16 +61,28 @@
             <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " (click)="sendUser(client)" >
                 <td  class="px-4 py-3 truncate max-w-[100px]">{{client.name}}</td>
                 <td class="px-4 py-3">${{client.debt|number}}</td>
-                <td class="px-4 py-3">{{client.lastpay |date:'MM/dd'}}</td>
-                <td  *ngIf="client.debt < 1" class="px-4 py-3"><p class="bg-green-500/10 text-center w-fit  border border-green-500/50 rounded-md text-green-400 py-1 px-2 text-sm">Pagado</p></td>
-                <td *ngIf="client.debt > 1"  class="px-4 py-3"><p class=" text-center w-fit px-2 border bg-red-500/15 border-red-500/50 text-red-400 rounded-md  py-1  text-sm">Impago</p></td>
+                <ng-container *ngIf="client.lastpay; else nodate">
+                  <td class="px-4 py-3">{{client.lastpay | date:'MM/dd'}}</td>
+                </ng-container>
+                <ng-template #nodate>
+                  <td class="px-4 py-3 text-white/20">N/A</td>
+                </ng-template>
+                <td *ngIf="client.total_sales > 0; else noSales" class="px-4 py-3">
+                  <p [ngClass]="{
+                      'bg-green-600/10 border! border-green-500/50! text-green-400': client.debt === 0,
+                      'bg-red-500/15 border border-red-500/50 text-red-400': client.debt > 0}" class="text-center w-fit px-3 py-1 text-sm font-medium rounded-md border transition-colors duration-200">
+                      {{ client.debt === 0 ? 'Pagado' : 'Impago' }}</p>
+                </td>
+                <ng-template #noSales>
+                  <td class="px-4 py-3 truncate max-w-[100px] "><p class="py-1 bg-gray-500/10 border border-gray-500/50 text-gray-400 rounded-md text-center">Sin ventas</p></td>
+                </ng-template>
             </tr>
         
             
        </ng-container>
 
-
-       <ng-container *ngIf="!clients">
+<!-- SKELETON LOADER -->
+      <ng-container *ngIf="!clients">
         <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
           <td class="px-2" colspan="3" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
         </tr>

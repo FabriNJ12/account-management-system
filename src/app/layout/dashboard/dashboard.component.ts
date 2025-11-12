@@ -21,12 +21,13 @@ export class DashboardComponent implements OnInit {
   clientsAux: Clients[] | null = null;
 
   async ngOnInit() {
-    this.reload();
+    this.reload(); 
   }
 
   async reload() {
     this.clientsAux = await this.getUsers.getClients();
     this.clients = this.clientsAux
+    console.log(this.clients)
   }
 
   sendUser(data: Clients) {

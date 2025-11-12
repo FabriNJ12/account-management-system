@@ -5,4 +5,5 @@ export interface Clients {
   debt: number;
   lastpay:Date | null;
   lastPay_method: string | null;
+  total_sales:number
 }
