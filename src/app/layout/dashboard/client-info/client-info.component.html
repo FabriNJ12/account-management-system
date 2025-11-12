@@ -27,7 +27,7 @@
 
             <!-- BOTONES -->
             <div class="flex gap-3">
-              <button (click)="ShowModalPay = !ShowModalPay; addPayFunc()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition">Registrar pago</button>
+              <button [disabled]="((debt$ | async) ?? 0) === 0" (click)="ShowModalPay = !ShowModalPay; addPayFunc()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition" [ngClass]="{'bg-green-600/40 text-white/60 cursor-default hover:bg-green-600/40! pointer-events-none':((debt$ | async) ?? 0) === 0 }">Registrar pago</button>
               <button (click)="ShowModalSale = !ShowModalSale; addSaleFunc()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-md text-sm font-medium transition">Agregar venta</button>
             </div>
 
@@ -66,6 +66,15 @@
                       <td *ngIf="item.type === 'Venta'" class="px-3 py-2 text-right text-red-400 font-medium">+${{ item.amount |number}}</td>
                       <td *ngIf="item.type === 'Pago'" class="px-3 py-2 text-right text-green-400 font-medium">-${{ item.amount |number }}</td>
                     </tr>
+                  </ng-container>
+
+                  <ng-container *ngIf="history?.length === 0">
+                    <tr>
+                      <td colspan="3">
+                        <p class="text-center py-2 text-white/50">Sin movimientos</p>
+                      </td>
+                    </tr>
+                   
                   </ng-container>
                 </tbody>
               </table>

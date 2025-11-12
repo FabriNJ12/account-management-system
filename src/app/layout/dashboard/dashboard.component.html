@@ -57,7 +57,7 @@
 
       <!-- Fila clickeable -->
        <ng-container *ngFor="let client of clients">
-        <ng-container *ngIf="client.lastpay">
+        
             <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " (click)="sendUser(client)" >
                 <td  class="px-4 py-3 truncate max-w-[100px]">{{client.name}}</td>
                 <td class="px-4 py-3">${{client.debt|number}}</td>
@@ -65,7 +65,7 @@
                 <td  *ngIf="client.debt < 1" class="px-4 py-3"><p class="bg-green-500/10 text-center w-fit  border border-green-500/50 rounded-md text-green-400 py-1 px-2 text-sm">Pagado</p></td>
                 <td *ngIf="client.debt > 1"  class="px-4 py-3"><p class=" text-center w-fit px-2 border bg-red-500/15 border-red-500/50 text-red-400 rounded-md  py-1  text-sm">Impago</p></td>
             </tr>
-        </ng-container>
+        
             
        </ng-container>
 
