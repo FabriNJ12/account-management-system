@@ -9,7 +9,7 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent, // Layout siempre visible
     children: [
-      { path: '', redirectTo: 'customers', pathMatch: 'full' }, // default child
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // default child
       { path: 'dashboard', component: DashboardComponent },
       { path: 'customers', component: CustomersComponent },
     ],
