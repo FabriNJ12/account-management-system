@@ -32,7 +32,7 @@
       <tr class="*:border-b *:border-accentDM">
         <th scope="col" class="px-3 py-3">Cliente</th>
         <th scope="col" class="px-3 py-3">Deuda</th>
-        <th scope="col" class="px-3 py-3">Últ. pago</th>
+        <th scope="col" class="px-3 py-3 ">Últ. pago</th>
         <th scope="col" class="px-3 py-3">Estado</th>
       </tr>
     </thead>
@@ -40,40 +40,26 @@
     <!-- Body -->
     <tbody class="divide-y divide-divideDM">
 
-      <tr *ngIf="clients.length === 0" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
-        <td class="px-2" ><div class="h-4 w-3/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-3/3 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2 flex justify-center items-center" ><div class="h-4 w-2/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+    <ng-container *ngIf="clients">
+      <tr *ngIf="clients.length === 0">
+        <td colspan="5">
+          <div class="flex flex-col items-center justify-center py-5 px-4 opacity-50 text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 mb-1 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+            </svg>
+            <p class="text-gray-400 font-medium">Sin resultados</p>
+          </div>
+        </td>
       </tr>
+    </ng-container>
 
-       <tr *ngIf="clients.length === 0" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
-        <td class="px-2" ><div class="h-4 w-3/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-3/3 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2 flex justify-center items-center" ><div class="h-4 w-2/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-      </tr>
 
-       <tr *ngIf="clients.length === 0" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
-        <td class="px-2" ><div class="h-4 w-3/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-3/3 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2 flex justify-center items-center" ><div class="h-4 w-2/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-      </tr>
-
-       <tr *ngIf="clients.length === 0" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
-        <td class="px-2" ><div class="h-4 w-3/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-3/3 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2 flex justify-center items-center" ><div class="h-4 w-2/4 bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-        <td class="px-2" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
-      </tr>
-
-    
       <!-- Fila clickeable -->
        <ng-container *ngFor="let client of clients">
         <ng-container *ngIf="client.lastpay">
             <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " (click)="sendUser(client)" >
-                <td class="px-4 py-3 truncate max-w-[100px]">{{client.name}}</td>
+                <td  class="px-4 py-3 truncate max-w-[100px]">{{client.name}}</td>
                 <td class="px-4 py-3">${{client.debt|number}}</td>
                 <td class="px-4 py-3">{{client.lastpay |date:'MM/dd'}}</td>
                 <td  *ngIf="client.debt < 1" class="px-4 py-3"><p class="bg-green-500/10 text-center w-fit  border border-green-500/50 rounded-md text-green-400 py-1 px-2 text-sm">Pagado</p></td>
@@ -82,6 +68,34 @@
         </ng-container>
             
        </ng-container>
+
+
+       <ng-container *ngIf="!clients">
+        <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
+          <td class="px-2" colspan="3" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+        </tr>
+
+        <tr  class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
+          <td class="px-2" colspan="4" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+        </tr>
+
+        <tr  class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
+          <td class="px-2" colspan="2" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+        </tr>
+
+        <tr  class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
+          <td class="px-2" colspan="1" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+        </tr>
+
+        <tr  class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
+          <td class="px-2" colspan="3" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+        </tr>
+
+        <tr  class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
+          <td class="px-2" colspan="2" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
+        </tr>
+
+      </ng-container>
       
 
     

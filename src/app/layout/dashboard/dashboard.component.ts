@@ -17,8 +17,8 @@ export class DashboardComponent implements OnInit {
   constructor(private getUsers: GetUsersService) {}
 
   @ViewChild(ClientInfoComponent) client!: ClientInfoComponent;
-  clients: Clients[] = [];
-  clientsAux: Clients[] = [];
+  clients: Clients[] | null = null;
+  clientsAux: Clients[] | null = null;
 
   async ngOnInit() {
     this.reload();
