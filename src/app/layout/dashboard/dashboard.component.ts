@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   ShowModal = false;
   search = '';
   aux = 0;
+  msg: boolean = false;
 
   // Datos de clientes
   clients: Clients[] | null = null;
@@ -33,8 +34,11 @@ export class DashboardComponent implements OnInit {
   /** Recarga la lista completa de clientes desde el servicio */
   async reload(): Promise<void> {
     this.clientsAux = await this.getUsers.getClients();
+    if (this.clientsAux.length === 0) {
+      this.msg = true;
+      console.log('entro', this.msg);
+    }
     this.clients = this.clientsAux;
-    console.log(this.clients);
   }
 
   /** Abre el modal y envía los datos del cliente seleccionado */
@@ -134,7 +138,7 @@ export class DashboardComponent implements OnInit {
     if (this.sortAmount || this.sortPaid || this.sortUnpaid) {
       this.sortAmount = false;
       this.sortPaid = false;
-      this.sortUnpaid= false;
+      this.sortUnpaid = false;
       return;
     }
 

@@ -43,7 +43,7 @@
         <!-- Body -->
         <tbody class="divide-y divide-divideDM ">
 
-        <ng-container *ngIf="clients">
+        <ng-container *ngIf="clients && !msg; else noUsers">
           <tr *ngIf="clients.length === 0">
             <td colspan="5">
               <div class="flex flex-col items-center justify-center py-5 px-4 opacity-50 text-gray-500">
@@ -86,7 +86,7 @@
           </ng-container>
 
     <!-- SKELETON LOADER -->
-          <ng-container *ngIf="!clients">
+          <ng-container *ngIf="!clients && !msg">
             <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM " >
               <td class="px-2" colspan="3" ><div class="h-4 w-full bg-gray-700 rounded-full animate-pulse mt-2"></div></td>
             </tr>
@@ -113,7 +113,16 @@
 
           </ng-container>
           
-
+          <ng-template #noUsers>
+            <tr>
+            <td colspan="5">
+              <div class="flex flex-col items-center justify-center py-5 px-4 opacity-50 text-gray-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-exclamation"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4c.348 0 .686 .045 1.008 .128" /><path d="M19 16v3" /><path d="M19 22v.01" /></svg>
+                <p class="text-gray-400 font-medium mt-2 ">No hay usuarios registrados</p>
+              </div>
+            </td>
+          </tr>
+          </ng-template>
         
 
           <!-- Agregar más filas dinámicamente con *ngFor -->

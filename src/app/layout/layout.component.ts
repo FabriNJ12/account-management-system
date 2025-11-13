@@ -9,23 +9,55 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './layout.component.css',
 })
 export class LayoutComponent implements OnInit {
-  constructor(private router: Router) {}
+  // ============================================================
+  // 🧭 NAVEGACIÓN Y ESTADO GENERAL
+  // ============================================================
+  currentModule: string = 'Movimientos';
+  menuOpen: boolean = false;
+  expandSideBar: boolean = JSON.parse(
+    localStorage.getItem('MenuOpen') || 'false'
+  );
+
+  // ============================================================
+  // 📂 DROPDOWNS Y MENÚ LATERAL
+  // ============================================================
   expanDropdown1: boolean = false;
   expanDropdown2: boolean = false;
   expanDropdown3: boolean = false;
-  expandSideBar: boolean = JSON.parse(localStorage.getItem('MenuOpen')!);
-  menuOpen: boolean = false;
 
-  setLocalStorage() {
-    this.expandSideBar = !this.expandSideBar;
-    localStorage.setItem('MenuOpen', JSON.stringify(this.expandSideBar));
-  }
+  // ============================================================
+  // 🪟 MODALES / SESIÓN
+  // ============================================================
+  showModal: boolean = false;
 
+  // ============================================================
+  // ⚙️ CONSTRUCTOR
+  // ============================================================
+  constructor(private router: Router) {}
+
+  // ============================================================
+  // 🔄 CICLO DE VIDA
+  // ============================================================
   ngOnInit(): void {
     window.addEventListener('popstate', this.handlePopState);
   }
 
-  toggleNav() {
+  ngOnDestroy(): void {
+    window.removeEventListener('popstate', this.handlePopState);
+  }
+
+  // ============================================================
+  // 💾 LOCAL STORAGE
+  // ============================================================
+  setLocalStorage(): void {
+    this.expandSideBar = !this.expandSideBar;
+    localStorage.setItem('MenuOpen', JSON.stringify(this.expandSideBar));
+  }
+
+  // ============================================================
+  // 📱 CONTROL DE NAVEGACIÓN / HISTORIAL
+  // ============================================================
+  toggleNav(): void {
     if (!this.menuOpen) {
       this.menuOpen = true;
       history.pushState({ menuOpen: true }, '', window.location.href);
@@ -34,7 +66,7 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  handlePopState = (event: PopStateEvent) => {
+  handlePopState = (event: PopStateEvent): void => {
     if (this.menuOpen) {
       this.menuOpen = false;
       // Evita navegar hacia atrás realmente
@@ -42,32 +74,36 @@ export class LayoutComponent implements OnInit {
     }
   };
 
-  ngOnDestroy(): void {
-    window.removeEventListener('popstate', this.handlePopState);
-  }
-
-  toModify_inventory() {
-    this.router.navigate(['modify-inventory']);
-  }
-
-  currentModule: string = 'Movimientos';
-
-  navigation(route: string) {
+  // ============================================================
+  // 🚀 NAVEGACIÓN ENTRE MÓDULOS
+  // ============================================================
+  navigation(route: string): void {
     setTimeout(() => {
       this.menuOpen = false;
-      if (route === 'Movimientos') {
-        this.router.navigate(['dashboard']);
-        this.currentModule = route;
-        return;
-      } else if (route === 'Alta Clientes') {
-        this.router.navigate(['customers']);
-        this.currentModule = route;
+
+      switch (route) {
+        case 'Movimientos':
+          this.router.navigate(['dashboard']);
+          break;
+        case 'Alta Clientes':
+          this.router.navigate(['customers']);
+          break;
+        default:
+          return;
       }
+
+      this.currentModule = route;
     }, 100);
   }
 
-  showModal: boolean = false;
-  LogOut() {
+  toModify_inventory(): void {
+    this.router.navigate(['modify-inventory']);
+  }
+
+  // ============================================================
+  // 🔐 SESIÓN / CIERRE DE SESIÓN
+  // ============================================================
+  LogOut(): void {
     sessionStorage.removeItem('usuario');
     this.router.navigate(['login']);
   }
