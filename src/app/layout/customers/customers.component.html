@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-BGblack text-gray-200 font-inter py-4 px-4 lg:py-4 lg:px-7  relative">
 
-  <section [ngClass]="{'opacity-0 -translate-y-5':!showAlert, 'opacity-100 -translate-y-1':showAlert}" class="fixed transition-all duration-200  flex flex-row z-200 bg-[#1e2939] items-center justify-center py-2 px-4 gap-2 border shadow-[0_0_25px_4px_rgba(255,255,255,0.08)]! shadow-blue-300/5 border-[#343f4d] rounded-md mt-1   left-1/2  -translate-x-1/2 ">
+  <section [ngClass]="{'opacity-0 -translate-y-5':!showAlert, 'opacity-100 -translate-y-1':showAlert}" class="fixed transition-all duration-200 pointer-events-none  flex flex-row z-200 bg-[#1e2939] items-center justify-center py-2 px-4 gap-2 border shadow-[0_0_25px_4px_rgba(255,255,255,0.08)]! shadow-blue-300/5 border-[#343f4d] rounded-md mt-1   left-1/2  -translate-x-1/2 ">
     <svg viewBox="0 0 24 24" fill="none" height="20" stroke="currentColor" stroke-width="2" data-slot="icon" aria-hidden="true" class="text-[#05df72]">
     <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
@@ -9,47 +9,45 @@
   <!-- <h1 class="text-xl font-semibold mb-4 text-center">Clientes</h1> -->
 
  <!-- Header -->
-<header class="flex flex-col md:items-start md:justify-between mb-4 gap-3 ">
+  <header class="flex flex-col md:items-start md:justify-between mb-4 gap-3 ">
 
-  <!-- Botón cargar cliente (solo desktop) -->
-  <button class="hidden md:flex bg-emerald-600 hover:bg-emerald-500 active:scale-[0.97] transition-transform text-white font-medium px-3 py-2 text-xs rounded-lg shadow-[0_0_10px_2px_rgba(16,185,129,0.3)]">
-    + Cargar cliente
-  </button>
+    <!-- Botón cargar cliente (solo desktop) -->
+    <button class="hidden md:flex bg-emerald-600 hover:bg-emerald-500 active:scale-[0.97] transition-transform text-white font-medium px-3 py-2 text-xs rounded-lg shadow-[0_0_10px_2px_rgba(16,185,129,0.3)]">
+      + Cargar cliente
+    </button>
 
-  <!-- Contenedor input + ordenar -->
-  <div class="flex flex-row justify-between items-center w-full lg:w-full  gap-3">
-    <!-- Input búsqueda -->
-    <div class="relative flex-1">
-      <svg class="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"/>
-      </svg>
-      <input [(ngModel)]="search" (input)="searchFuncion()" type="text" placeholder="Buscar" class="w-full max-w-50 sm:max-w-75 pl-8 pr-2 py-1 rounded-md text-white placeholder:text-gray-400 border border-divideDM bg-accentDM transition-all duration-300 shadow-[0_0_10px_2px_rgba(255,255,255,0.03)] focus:shadow-none focus:ring-1 focus:ring-gray-400 focus:outline-none placeholder:text-sm"/>
+    <!-- Contenedor input + ordenar -->
+    <div class="flex flex-row justify-between items-center w-full  gap-3 ">
+      <!-- Input búsqueda -->
+      <div class="relative ">
+        <svg class="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"/>
+        </svg>
+        <input [(ngModel)]="search" (input)="searchFuncion()" type="text" placeholder="Buscar" class="w-full max-w-50 sm:max-w-75 pl-8 pr-2 py-1 rounded-md text-white placeholder:text-gray-400 border border-divideDM bg-accentDM transition-all duration-300 shadow-[0_0_10px_2px_rgba(255,255,255,0.03)] focus:shadow-none focus:ring-1 focus:ring-gray-400 focus:outline-none placeholder:text-sm"/>
+      </div>
 
+      
+      <div class="flex  flex-row *:text-gray-200 divide-x divide-divideDM border border-divideDM overflow-hidden  rounded-lg *:px-3.5 *:py-1.5 *:hover:bg-accentDM *:transition-colors duration-200">
+          <button (click)="orderAsc(asc=!asc)"  [ngClass]="{'bg-[#2a3c5a]! hover:bg-[#2a3c5a]! text-white!':asc}" class="cursor-pointer">
+           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sort-a-z"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 8h4l-4 8h4" /><path d="M4 16v-6a2 2 0 1 1 4 0v6" /><path d="M4 13h4" /><path d="M11 12h2" /></svg>
+          </button>
+          
+          <button  (click)="orderRecent(recent=!recent)"  [ngClass]="{'bg-[#2a3c5a] hover:bg-[#2a3c5a]! text-white!  ':recent}" class="cursor-pointer ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  class="icon pointer-events-none *:pointer-events-none select-none icon-tabler icons-tabler-outline icon-tabler-clock-hour-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 7v5" /><path d="M12 12l2 -3" /></svg>
+          </button>
 
+          <button  (click)="orderDesc(desc=!desc)"  [ngClass]="{'bg-[#2a3c5a] hover:bg-[#2a3c5a]! text-white!  ':desc}" class="cursor-pointer ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon pointer-events-none *:pointer-events-none select-none  icon-tabler icons-tabler-outline icon-tabler-sort-z-a"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8h4l-4 8h4" /><path d="M16 16v-6a2 2 0 1 1 4 0v6" /><path d="M16 13h4" /><path d="M11 12h2" /></svg>
+          </button>
+      </div>
     </div>
 
-    <!-- Botón ordenar A-Z -->
-    <div class="flex  flex-row *:text-gray-200 divide-x divide-divideDM border border-divideDM rounded-lg *:px-3.5 *:py-1.5 *:hover:bg-accentDM *:cursor-pointer *:transition-colors duration-200">
-        <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sort-a-z"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 8h4l-4 8h4" /><path d="M4 16v-6a2 2 0 1 1 4 0v6" /><path d="M4 13h4" /><path d="M11 12h2" /></svg>
-        </button>
-        
-        <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
-        </button>
+    
+  </header>
 
-        <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sort-z-a"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8h4l-4 8h4" /><path d="M16 16v-6a2 2 0 1 1 4 0v6" /><path d="M16 13h4" /><path d="M11 12h2" /></svg>
-        </button>
-    </div>
-  </div>
 
-  
-</header>
-
-<!-- FAB (mobile only) -->
   <button (click)="showModal = !showModal" class="md:hidden fixed bottom-5 right-5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.96] w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/30 transition-transform z-1 cursor-pointer">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7 text-white">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>

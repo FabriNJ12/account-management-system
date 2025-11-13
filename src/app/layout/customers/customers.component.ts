@@ -12,6 +12,7 @@ import { customers } from '../../interfaces/customers';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { EditCustomersComponent } from './edit-customers/edit-customers.component';
 import { FormsModule } from '@angular/forms';
+import { flatMap } from 'rxjs';
 
 type ColorClassMap = {
   cyan: string;
@@ -34,34 +35,40 @@ type ColorClassMap = {
   styleUrl: './customers.component.css',
 })
 export class CustomersComponent implements OnInit {
+  // =========================================================
+  // 🔧 DEPENDENCIAS E INYECCIONES
+  // =========================================================
   constructor(
     private customersService: CustomersService,
     private ngZone: NgZone
   ) {}
 
+  // =========================================================
+  // 🌀 CICLO DE VIDA
+  // =========================================================
   async ngOnInit() {
     this.getClients();
   }
 
-  async getClients() {
-    const data = await this.customersService.getClients();
-    this.clients = null;
-    setTimeout(() => {
-      this.ngZone.run(() => {
-        this.clients = data;
-        this.clientsAux = data;
-      });
-    }, 500);
-  }
-
+  // =========================================================
+  // 📦 ESTADO Y VARIABLES DE CONTROL
+  // =========================================================
   showAlert: boolean = false;
+  showModal: boolean = false;
+  showModalEditCustomers: boolean = false;
 
   clients: customers[] | null = null;
   clientsAux: customers[] | null = null;
 
+  search: string = '';
+  aux: number = 0;
+
+  // =========================================================
+  // 🎨 UI / ESTILOS / COLORES DINÁMICOS
+  // =========================================================
   colorPalette = ['cyan', 'blue', 'teal', 'pink', 'emerald', 'lime'];
 
-  colorClasses: ColorClassMap = {
+  colorClasses: Record<string, string> = {
     cyan: 'bg-cyan-300/10 border-cyan-300/10 shadow-cyan-300/10',
     blue: 'bg-blue-300/10 border-blue-300/10 shadow-blue-300/10',
     teal: 'bg-teal-300/10 border-teal-300/10 shadow-teal-300/10',
@@ -71,11 +78,8 @@ export class CustomersComponent implements OnInit {
   };
 
   getColorClass(index: number) {
-    const color = this.colorPalette[
-      index % this.colorPalette.length
-    ] as keyof ColorClassMap;
-
-    return [this.colorClasses[color]];
+    const color = this.colorPalette[index % this.colorPalette.length];
+    return this.colorClasses[color];
   }
 
   getColorCard(index: number) {
@@ -87,19 +91,29 @@ export class CustomersComponent implements OnInit {
     ];
   }
 
-  showModal: boolean = false;
-  showModalEditCustomers: boolean = false;
-
+  // =========================================================
+  // 📡 EVENTOS Y OUTPUTS
+  // =========================================================
   @Output() signalToReload = new EventEmitter<void>();
   @ViewChild(EditCustomersComponent) editCustomerComp!: EditCustomersComponent;
-  animate() {
-    this.getClients();
+
+  // =========================================================
+  // ⚙️ LÓGICA DE NEGOCIO / FUNCIONAL
+  // =========================================================
+  async getClients() {
+    const data:customers[] = await this.customersService.getClients();
+    this.clients = null;
+
+    const dataSorted:customers[] = data.sort((a,b) => a.id - b.id)
+    
+
+    // Simula pequeña transición visual
     setTimeout(() => {
-      this.showAlert = true;
-      setTimeout(() => {
-        this.showAlert = false;
-      }, 3000);
-    }, 200);
+      this.ngZone.run(() => {
+        this.clients = dataSorted;
+        this.clientsAux = dataSorted;
+      });
+    }, 500);
   }
 
   editCustomer(customer: customers) {
@@ -107,32 +121,83 @@ export class CustomersComponent implements OnInit {
     this.showModalEditCustomers = !this.showModalEditCustomers;
   }
 
-  search: string = '';
-  aux: number = 0;
-  searchFuncion() {
-    if ( !this.clients || !this.clientsAux) return;
+  animate() {
+    this.getClients();
+    setTimeout(() => {
+      this.showAlert = true;
+      setTimeout(() => (this.showAlert = false), 3000);
+    }, 200);
+  }
 
-    if (this.search === '') {
+  // =========================================================
+  // 🔍 FILTRADO / BÚSQUEDA
+  // =========================================================
+  searchFuncion() {
+    if (!this.clients || !this.clientsAux) return;
+
+    if (this.search.trim() === '') {
       this.clients = this.clientsAux;
       this.aux = 0;
-      return
+      return;
     }
 
     this.aux += 1;
+    const searchTerm = this.search.toLowerCase();
 
-    if (this.aux !== this.search.length) {
-      this.clients = this.clientsAux.filter((e) =>
-        e.name.toLowerCase().includes(this.search.toLowerCase())
+    const source =
+      this.aux !== this.search.length ? this.clientsAux : this.clients;
+    this.clients = source.filter((e) =>
+      e.name.toLowerCase().includes(searchTerm)
+    );
+    this.aux = this.clients.length;
+  }
+
+  asc: boolean = false;
+  desc: boolean = false;
+  recent: boolean = false;
+
+  orderAsc(value: boolean) {
+    if (!this.clients || !this.clientsAux) return;
+    this.desc = false;
+    this.recent = false;
+
+    if (value) {
+      this.clients = [...this.clients].sort((a, b) =>
+        a.name.localeCompare(b.name)
       );
-      this.aux = this.clients.length;
       return;
     }
 
-    if (this.aux === this.search.length) {
-      this.clients = this.clients?.filter((e) =>
-        e.name.toLowerCase().includes(this.search.toLowerCase())
+    this.clients = this.clientsAux;
+  }
+
+  orderDesc(value: boolean) {
+    if (!this.clients || !this.clientsAux) return;
+    this.asc = false;
+    this.recent = false;
+
+    if (value) {
+      this.clients = [...this.clients].sort((a, b) =>
+        b.name.localeCompare(a.name)
       );
       return;
     }
+
+    this.clients = this.clientsAux;
+  }
+
+  orderRecent(value: boolean) {
+    if (!this.clients || !this.clientsAux) return;
+
+    this.asc = false;
+    this.desc = false;
+
+    if (value) {
+      this.clients = [...this.clients].sort((a, b) => b.id - a.id);
+      console.log(this.clients);
+      return;
+    }
+
+    this.clients = this.clientsAux;
   }
 }
