@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
   filter(value: string) {
     if (!this.clients || !this.clientsAux) return;
 
-    this.clients = this.clientsAux
+    this.clients = this.clientsAux;
 
     if (value === 'desc') {
       this.sortPaid = false;
@@ -118,16 +118,26 @@ export class DashboardComponent implements OnInit {
       this.sortAmount = false;
       if (!this.sortUnpaid) {
         this.clients = [...this.clients].filter(
-          (e) =>  e.debt !== 0 && e.total_sales > 0
+          (e) => e.debt !== 0 && e.total_sales > 0
         );
         this.sortUnpaid = !this.sortUnpaid;
-        console.log("entro aqui")
+        console.log('entro aqui');
         return;
-        
       }
       this.clients = this.clientsAux;
       this.sortUnpaid = !this.sortUnpaid;
       return;
     }
+  }
+
+  useInput() {
+    if (this.sortAmount || this.sortPaid || this.sortUnpaid) {
+      this.sortAmount = false;
+      this.sortPaid = false;
+      this.sortUnpaid= false;
+      return;
+    }
+
+    this.clients = this.clientsAux;
   }
 }

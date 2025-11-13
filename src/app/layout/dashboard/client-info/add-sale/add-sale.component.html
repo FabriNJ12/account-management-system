@@ -49,7 +49,7 @@
 
             <!-- BOTONES -->
             <div class="flex gap-3 pt-3">
-              <button (click)="submit()"  class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition">
+              <button (click)="submit()" [ngClass]="{'bg-green-600/40! text-white/60! cursor-default! hover:bg-green-600/40! pointer-events-none':alert}"  class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition">
                 <p *ngIf="Status==='nothing'">Confirmar venta</p>
                   <div *ngIf="Status === 'loading'">
                     <div class="flex flex-row justify-center items-center gap-2">
