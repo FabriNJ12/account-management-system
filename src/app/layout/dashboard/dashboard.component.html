@@ -2,16 +2,17 @@
 
 
   <header class=" flex justify-between mt-5 mx-4 shrink-0 ">
-    <div class="flex flex-row *:text-gray-400 divide-x divide-divideDM border border-divideDM rounded-lg *:px-4 *:py-1 *:hover:bg-accentDM *:cursor-pointer *:transition-colors duration-200">
-        <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-filter"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h16v2.172a2 2 0 0 1 -.586 1.414l-4.414 4.414v7l-6 2v-8.5l-4.48 -4.928a2 2 0 0 1 -.52 -1.345v-2.227z" /></svg>
+    <div class="flex flex-row *:text-gray-400 divide-x divide-divideDM border border-divideDM rounded-lg *:px-4 *:py-1 *:hover:bg-accentDM *:cursor-pointer *:transition-colors duration-200 overflow-hidden">
+        <button (click)="filter('unpaid');" [ngClass]="{'bg-[#2a3c5a] hover:bg-[#2a3c5a]! text-white!  ':sortUnpaid}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-x" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10l4 4m0 -4l-4 4" /></svg>
         </button>
         
-        <button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-download"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" /><path d="M7 11l5 5l5 -5" /><path d="M12 4l0 12" /></svg>
+        <button (click)="filter('paid')" [ngClass]="{'bg-[#2a3c5a] hover:bg-[#2a3c5a]! text-white!  ':sortPaid}">
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" />
+          </svg>
         </button>
 
-        <button>
+        <button (click)="filter('desc')" [ngClass]="{'bg-[#2a3c5a] hover:bg-[#2a3c5a]! text-white!  ':sortAmount}">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-caret-up-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 10l-6 -6l-6 6h12" /><path d="M18 14l-6 6l-6 -6h12" /></svg>
         </button>
     </div>
@@ -27,7 +28,7 @@
 
   </header>
 
-  <div class="overflow-x-auto w-full px-4 rounded-xl flex-1 overflow-y-auto  ">
+  <div class="overflow-x-auto w-full px-4 rounded-xl flex-1 overflow-y-auto scroll-transparent  ">
       <table class="min-w-full text-sm text-left text-gray-300 dark:text-gray-300 border rounded-xl border-accentDM border-separate border-spacing-0 overflow-hidden ">
         <!-- Headers -->
         <thead class="bg-accentDM text-[#e9ebed] uppercase text-xs overflow-hidden">
