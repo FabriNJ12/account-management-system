@@ -3,6 +3,7 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
 
 import { LayoutComponent } from './layout/layout.component';
 import { CustomersComponent } from './layout/customers/customers.component';
+import { OrdersComponent } from './layout/orders/orders.component';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // default child
       { path: 'dashboard', component: DashboardComponent },
       { path: 'customers', component: CustomersComponent },
+      {path: 'orders', component:OrdersComponent}
     ],
   },
 ];

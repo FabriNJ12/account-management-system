@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
   msg: boolean = false;
 
   // Datos de clientes
-  clients: Clients[] | null = null;
-  clientsAux: Clients[] | null = null;
+  clientsOriginal: Clients[] | null = null;
+  clientsFiltered: Clients[] | null = null;
 
   // Referencia al componente hijo
   @ViewChild(ClientInfoComponent) client!: ClientInfoComponent;
@@ -33,12 +33,13 @@ export class DashboardComponent implements OnInit {
 
   /** Recarga la lista completa de clientes desde el servicio */
   async reload(): Promise<void> {
-    this.clientsAux = await this.getUsers.getClients();
-    if (this.clientsAux.length === 0) {
+    this.clientsOriginal = await this.getUsers.getClients();
+    console.log(this.clientsOriginal)
+    if (this.clientsOriginal.length === 0) {
       this.msg = true;
-      console.log('entro', this.msg);
     }
-    this.clients = this.clientsAux;
+    this.clientsFiltered = this.clientsOriginal;
+    this.loading = false
   }
 
   /** Abre el modal y envía los datos del cliente seleccionado */
@@ -48,33 +49,6 @@ export class DashboardComponent implements OnInit {
   }
 
   /** Filtra los clientes por nombre según el texto de búsqueda */
-  searchFuncion(): void {
-    if (!this.clients || !this.clientsAux) return;
-
-    // Si el input está vacío, restaurar lista original
-    if (this.search.trim() === '') {
-      this.clients = this.clientsAux;
-      this.aux = 0;
-      return;
-    }
-
-    this.aux += 1;
-
-    // Filtrado según longitud del texto buscado
-    if (this.aux !== this.search.length) {
-      this.clients = this.clientsAux.filter((e) =>
-        e.name.toLowerCase().includes(this.search.toLowerCase())
-      );
-      this.aux = this.clients.length;
-      return;
-    }
-
-    if (this.aux === this.search.length) {
-      this.clients = this.clients.filter((e) =>
-        e.name.toLowerCase().includes(this.search.toLowerCase())
-      );
-    }
-  }
 
   sortAmount: boolean = false;
 
@@ -82,66 +56,58 @@ export class DashboardComponent implements OnInit {
 
   sortUnpaid: boolean = false;
 
-  filter(value: string) {
-    if (!this.clients || !this.clientsAux) return;
+  loading: boolean = true;
+  applyFiltersAndSearch() {
+    if (!this.clientsOriginal || !this.clientsFiltered) return;
 
-    this.clients = this.clientsAux;
+    let data = [...this.clientsOriginal];
 
-    if (value === 'desc') {
-      this.sortPaid = false;
-      this.sortUnpaid = false;
-      if (!this.sortAmount) {
-        this.clients = [...this.clients].sort((a, b) => b.debt - a.debt);
-        this.sortAmount = !this.sortAmount;
-        return;
-      }
-
-      this.clients = this.clientsAux;
-      this.sortAmount = !this.sortAmount;
-      return;
+    // --- 1) Filtro por búsqueda ---
+    if (this.search.trim() !== '') {
+      const term = this.search.toLowerCase();
+      data = data.filter((c) => c.name.toLowerCase().includes(term));
     }
 
-    if (value === 'paid') {
-      this.sortAmount = false;
-      this.sortUnpaid = false;
-      if (!this.sortPaid) {
-        this.clients = [...this.clients].filter(
-          (e) => e.debt === 0 && e.total_sales > 0
-        );
-        this.sortPaid = !this.sortPaid;
-        return;
-      }
-
-      this.clients = this.clientsAux;
-      this.sortPaid = !this.sortPaid;
-      return;
+    // --- 2) Filtro por deuda orden asc/desc ---
+    if (this.sortAmount) {
+      data = data.sort((a, b) => b.debt - a.debt);
     }
 
-    if (value === 'unpaid') {
-      this.sortPaid = false;
-      this.sortAmount = false;
-      if (!this.sortUnpaid) {
-        this.clients = [...this.clients].filter(
-          (e) => e.debt !== 0 && e.total_sales > 0
-        );
-        this.sortUnpaid = !this.sortUnpaid;
-        console.log('entro aqui');
-        return;
-      }
-      this.clients = this.clientsAux;
-      this.sortUnpaid = !this.sortUnpaid;
-      return;
+    // --- 3) Filtro por pagados ---
+    if (this.sortPaid) {
+      data = data.filter((c) => c.debt === 0 && c.total_sales > 0);
     }
+
+    // --- 4) Filtro por impagos ---
+    if (this.sortUnpaid) {
+      data = data.filter((c) => c.debt !== 0 && c.total_sales > 0);
+    }
+
+    this.clientsFiltered = data;
   }
 
-  useInput() {
-    if (this.sortAmount || this.sortPaid || this.sortUnpaid) {
-      this.sortAmount = false;
-      this.sortPaid = false;
-      this.sortUnpaid = false;
-      return;
-    }
+  searchFuncion() {
+    this.applyFiltersAndSearch();
+  }
 
-    this.clients = this.clientsAux;
+  filterAmount() {
+    this.sortAmount = !this.sortAmount;
+    this.sortPaid = false;
+    this.sortUnpaid = false;
+    this.applyFiltersAndSearch();
+  }
+
+  filterPaid() {
+    this.sortPaid = !this.sortPaid;
+    this.sortAmount = false;
+    this.sortUnpaid = false;
+    this.applyFiltersAndSearch();
+  }
+
+  filterUnpaid() {
+    this.sortUnpaid = !this.sortUnpaid;
+    this.sortAmount = false;
+    this.sortPaid = false;
+    this.applyFiltersAndSearch();
   }
 }
