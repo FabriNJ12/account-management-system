@@ -88,6 +88,9 @@ export class LayoutComponent implements OnInit {
         case 'Alta Clientes':
           this.router.navigate(['customers']);
           break;
+        case 'pedidos':
+          this.router.navigate(['orders']);
+          break;
         default:
           return;
       }

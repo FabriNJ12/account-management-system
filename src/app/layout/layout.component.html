@@ -24,6 +24,13 @@
                 </div>  
       </button>
 
+      <button (click)="navigation('pedidos')"  [ngClass]="{ 'px-2':expandSideBar, 'pl-[5px]':!expandSideBar, 'bg-[#1a222f]! text-white!': currentModule === 'pedidos'}" class="cursor-pointer duration-200 hover:scale-101 font-semibold py-2 bg-transparent text-gris-200 w-full rounded-md flex flex-row justify-start  items-center hover:bg-celeste-200 hover:text-celeste-800 outline-none mb-4"> 
+               <div class="flex flex-row gap-1 ml-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-list"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 12l.01 0" /><path d="M13 12l2 0" /><path d="M9 16l.01 0" /><path d="M13 16l2 0" /></svg>
+                    <p  class="transition-all duration-300 origin-left whitespace-nowrap" [ngClass]="{'opacity-0  ml-0 scale-80':!expandSideBar, 'opacity-100  ml-1 scale-100':expandSideBar}">Movimientos</p>
+                </div>  
+      </button>
+
      
 
      
@@ -81,6 +88,13 @@
                 </div> 
         </button>
 
+        <button  (click)="navigation('pedidos')"  [ngClass]="{'scale-86 opacity-0 pointer-events-none':!menuOpen, 'scale-100 opacity-100':menuOpen,'bg-[#1a222f]! text-white!':currentModule==='pedidos'}"  class="cursor-pointer  hover:scale-101 font-semibold py-2 bg-transparent text-gris-200 w-full rounded-md flex flex-row justify-between  items-center md:hover:bg-celeste-200 md:hover:text-celeste-800 active:bg-celeste-200 active:text-celeste-800 outline-none transition-all mb-4 origin-bottom-left duration-300"> 
+                <div class="flex flex-row gap-1 px-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-list"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 12l.01 0" /><path d="M13 12l2 0" /><path d="M9 16l.01 0" /><path d="M13 16l2 0" /></svg>
+                    <p  class="transition-all duration-300 origin-left whitespace-nowrap ml-1" >Anotar pedidos</p>
+                </div> 
+        </button>
+
        
 
         
@@ -100,9 +114,6 @@
     <div [ngClass]="{'opacity-0 pointer-events-none':!menuOpen}" class="w-screen h-full inset-0 md:hidden bg-black/30 backdrop-blur-[2px] z-9 fixed top-0 duration-200 "></div>
     <!-- RUTAS -->
     <router-outlet></router-outlet>
-
-
-
 
     <!-- modal cerrar sesion -->
   <!-- <div class="font-inter "> 
