@@ -2,13 +2,13 @@
 
   <section [ngClass]="{'opacity-0 -translate-y-5':!showAlert, 'opacity-100 -translate-y-1':showAlert}" class="fixed transition-all duration-200 pointer-events-none  flex flex-row z-200 bg-[#1e2939] items-center justify-center py-2 px-4 gap-2 border shadow-[0_0_25px_4px_rgba(255,255,255,0.08)]! shadow-blue-300/5 border-[#343f4d] rounded-md mt-1   left-1/2  -translate-x-1/2 ">
     <svg viewBox="0 0 24 24" fill="none" height="20" stroke="currentColor" stroke-width="2" data-slot="icon" aria-hidden="true" class="text-[#05df72]">
-    <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
     <p class="text-md truncate">Cliente cargado correctamente!</p>
   </section>
   <!-- <h1 class="text-xl font-semibold mb-4 text-center">Clientes</h1> -->
 
- <!-- Header -->
+  <!-- Header -->
   <header class="flex flex-col md:items-start md:justify-between mb-4 gap-3 ">
 
     <!-- Botón cargar cliente (solo desktop) -->
@@ -21,134 +21,131 @@
       <!-- Input búsqueda -->
       <div class="relative ">
         <svg class="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"/>
-        </svg>
-        <input [(ngModel)]="search" (input)="searchFuncion()" type="text" placeholder="Buscar" class="w-full max-w-50 sm:max-w-75 pl-8 pr-2 py-1 rounded-md text-white placeholder:text-gray-400 border border-divideDM bg-accentDM transition-all duration-300 shadow-[0_0_10px_2px_rgba(255,255,255,0.03)] focus:shadow-none focus:ring-1 focus:ring-gray-400 focus:outline-none placeholder:text-sm"/>
-      </div>
+            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z"/>
+          </svg>
+          <input [(ngModel)]="search" (input)="searchFuncion()" type="text" placeholder="Buscar" class="w-full max-w-50 sm:max-w-75 pl-8 pr-2 py-1 rounded-md text-white placeholder:text-gray-400 border border-divideDM bg-accentDM transition-all duration-300 shadow-[0_0_10px_2px_rgba(255,255,255,0.03)] focus:shadow-none focus:ring-1 focus:ring-gray-400 focus:outline-none placeholder:text-sm"/>
+        </div>
 
-      
-      <div class="flex  flex-row *:text-gray-200 divide-x divide-divideDM border border-divideDM overflow-hidden  rounded-lg *:px-3.5 *:py-1.5 *:hover:bg-accentDM *:transition-colors duration-200">
+
+        <div class="flex  flex-row *:text-gray-200 divide-x divide-divideDM border border-divideDM overflow-hidden  rounded-lg *:px-3.5 *:py-1.5 *:hover:bg-accentDM *:transition-colors duration-200">
           <button (click)="orderAsc(asc=!asc)"  [ngClass]="{'bg-[#2a3c5a]! hover:bg-[#2a3c5a]! text-white!':asc}" class="cursor-pointer">
-           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sort-a-z"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 8h4l-4 8h4" /><path d="M4 16v-6a2 2 0 1 1 4 0v6" /><path d="M4 13h4" /><path d="M11 12h2" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sort-a-z"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 8h4l-4 8h4" /><path d="M4 16v-6a2 2 0 1 1 4 0v6" /><path d="M4 13h4" /><path d="M11 12h2" /></svg>
           </button>
-          
+
           <button  (click)="orderRecent(recent=!recent)"  [ngClass]="{'bg-[#2a3c5a] hover:bg-[#2a3c5a]! text-white!  ':recent}" class="cursor-pointer ">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  class="icon pointer-events-none *:pointer-events-none select-none icon-tabler icons-tabler-outline icon-tabler-clock-hour-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 7v5" /><path d="M12 12l2 -3" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"  class="icon pointer-events-none *:pointer-events-none select-none icon-tabler icons-tabler-outline icon-tabler-clock-hour-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 7v5" /><path d="M12 12l2 -3" /></svg>
           </button>
 
           <button  (click)="orderDesc(desc=!desc)"  [ngClass]="{'bg-[#2a3c5a] hover:bg-[#2a3c5a]! text-white!  ':desc}" class="cursor-pointer ">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon pointer-events-none *:pointer-events-none select-none  icon-tabler icons-tabler-outline icon-tabler-sort-z-a"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8h4l-4 8h4" /><path d="M16 16v-6a2 2 0 1 1 4 0v6" /><path d="M16 13h4" /><path d="M11 12h2" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon pointer-events-none *:pointer-events-none select-none  icon-tabler icons-tabler-outline icon-tabler-sort-z-a"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8h4l-4 8h4" /><path d="M16 16v-6a2 2 0 1 1 4 0v6" /><path d="M16 13h4" /><path d="M11 12h2" /></svg>
           </button>
+        </div>
       </div>
-    </div>
-
-    
-  </header>
 
 
-  <button (click)="showModal = !showModal" class="md:hidden fixed bottom-5 right-5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.96] w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/30 transition-transform z-1 cursor-pointer">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7 text-white">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-    </svg>
-  </button>
+    </header>
 
 
-
-  <!-- GRID -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    <ng-container *ngIf="clients">
-      <div *ngIf="clients.length < 1" class="col-span-full flex flex-col items-center justify-center py-16 px-4">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex justify-center items-center mr-3 text-gray-500 mb-4 opacity-50 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
-        </svg>
-        <p class="text-gray-400 font-medium mb-1">Sin resultados</p>
-      </div>
-    </ng-container>
-    
-    <!-- CARD -->
-    <div (click)="editCustomer(client)"  *ngFor="let client of clients; let i = index" class="bg-accentDM/10 rounded-2xl border border-divideDM flex flex-col items-center text-center shadow-[0_0_20px_2px_rgba(255,255,255,0.03)] hover:shadow-[0_0_25px_3px_rgba(255,255,255,0.06)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 cursor-pointer select-none  p-4" >
-
-    <!-- Header -->
-    <div class="w-full  flex justify-between text-xs text-gray-400 mb-2">
-      <span class="font-medium">#{{ client.id }}</span>
-      <span class="opacity-70">Cliente</span>
-    </div>
-
-    <!-- Avatar -->
-    <div class="relative mb-3">
-      <div [ngClass]="getColorCard(i)" class="w-16 h-16 rounded-full border flex items-center justify-center shadow-[0_0_25px_4px_rgba(255,255,255,0.08)] " >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14c3.866 0 7 1.567 7 3.5V19a1 1 0 01-1 1H6a1 1 0 01-1-1v-1.5C5 15.567 8.134 14 12 14zm0-2a4 4 0 100-8 4 4 0 000 8z" />
-        </svg>
-      </div>
-    </div>
-
-    <!-- Nombre -->
-    <h3 class="text-base font-semibold text-gray-200 tracking-wide mb-1">{{ client.name }}</h3>
-
-    <!-- Teléfono -->
-    <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-          d="M2 5.5A2.5 2.5 0 014.5 3h1A2.5 2.5 0 018 5.5V7a1 1 0 01-1 1h-.5c-.828 0-1.5.672-1.5 1.5v1c0 4.142 3.358 7.5 7.5 7.5h1c.828 0 1.5-.672 1.5-1.5V16a1 1 0 011-1h1.5A2.5 2.5 0 0120 17.5v1A2.5 2.5 0 0117.5 21h-1C8.492 21 3 15.508 3 8.5v-1A2.5 2.5 0 012 5.5z" />
+    <button (click)="showModal = !showModal" class="md:hidden fixed bottom-5 right-5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.96] w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-emerald-500/30 transition-transform z-1 cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-7 h-7 text-white">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
       </svg>
-      <span>{{ client.tel }}</span>
+    </button>
+
+
+
+    <!-- GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      @if (clients) {
+        @if (clients.length < 1) {
+          <div class="col-span-full flex flex-col items-center justify-center py-16 px-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex justify-center items-center mr-3 text-gray-500 mb-4 opacity-50 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+            </svg>
+            <p class="text-gray-400 font-medium mb-1">Sin resultados</p>
+          </div>
+        }
+      }
+
+      <!-- CARD -->
+      @for (client of clients; track client; let i = $index) {
+        <div (click)="editCustomer(client)"  class="bg-accentDM/10 rounded-2xl border border-divideDM flex flex-col items-center text-center shadow-[0_0_20px_2px_rgba(255,255,255,0.03)] hover:shadow-[0_0_25px_3px_rgba(255,255,255,0.06)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 cursor-pointer select-none  p-4" >
+          <!-- Header -->
+          <div class="w-full  flex justify-between text-xs text-gray-400 mb-2">
+            <span class="font-medium">#{{ client.id }}</span>
+            <span class="opacity-70">Cliente</span>
+          </div>
+          <!-- Avatar -->
+          <div class="relative mb-3">
+            <div [ngClass]="getColorCard(i)" class="w-16 h-16 rounded-full border flex items-center justify-center shadow-[0_0_25px_4px_rgba(255,255,255,0.08)] " >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 14c3.866 0 7 1.567 7 3.5V19a1 1 0 01-1 1H6a1 1 0 01-1-1v-1.5C5 15.567 8.134 14 12 14zm0-2a4 4 0 100-8 4 4 0 000 8z" />
+              </svg>
+            </div>
+          </div>
+          <!-- Nombre -->
+          <h3 class="text-base font-semibold text-gray-200 tracking-wide mb-1">{{ client.name }}</h3>
+          <!-- Teléfono -->
+          <div class="flex items-center gap-1 text-xs text-gray-400 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M2 5.5A2.5 2.5 0 014.5 3h1A2.5 2.5 0 018 5.5V7a1 1 0 01-1 1h-.5c-.828 0-1.5.672-1.5 1.5v1c0 4.142 3.358 7.5 7.5 7.5h1c.828 0 1.5-.672 1.5-1.5V16a1 1 0 011-1h1.5A2.5 2.5 0 0120 17.5v1A2.5 2.5 0 0117.5 21h-1C8.492 21 3 15.508 3 8.5v-1A2.5 2.5 0 012 5.5z" />
+              </svg>
+              <span>{{ client.tel }}</span>
+            </div>
+            <!-- Footer: Compras / Pagos -->
+            <div class="w-full flex justify-between mt-auto text-sm font-medium text-gray-300 border-t border-divideDM pt-3">
+              <div class="flex flex-col items-center w-1/2 border-r border-divideDM">
+                <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Compras</span>
+                <span class="text-red-400 font-semibold">${{ client.total_sales| number}}</span>
+              </div>
+              <div class="flex flex-col items-center w-1/2">
+                <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Pagos</span>
+                <span class="text-green-400 font-semibold">${{ client.total_pays| number}}</span>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- skeleton loader -->
+        @if (!clients) {
+          @for (i of [0,1,3,4]; track i) {
+            <div class="bg-transparent rounded-2xl border border-divideDM flex flex-col items-center text-center  p-4 animate-pulse select-none">
+              <!-- Header skeleton -->
+              <div class="w-full flex justify-between text-xs text-gray-600 mb-2">
+                <span class="h-3 w-6 bg-gray-700 rounded-full"></span>
+                <span class="h-3 w-12 bg-gray-700 rounded-full"></span>
+              </div>
+              <!-- Avatar skeleton -->
+              <div class="relative mb-3">
+                <div class="w-16 h-16 rounded-full border border-divideDM flex items-center justify-center  bg-gray-700"></div>
+              </div>
+              <!-- Nombre skeleton -->
+              <div class="h-2 w-26 bg-gray-700 rounded-full mb-1"></div>
+              <!-- Teléfono skeleton -->
+              <div class="flex items-center gap-1 mb-4">
+                <div class="w-3.5 h-2 bg-gray-700 rounded-full opacity-70"></div>
+                <div class="h-3 w-14 bg-gray-700 rounded-full"></div>
+              </div>
+              <!-- Footer: Compras / Pagos skeleton -->
+              <div class="w-full flex justify-between mt-auto border-t border-divideDM pt-3">
+                <div class="flex flex-col items-center w-1/2 border-r border-divideDM">
+                  <span class="h-2 w-10 bg-gray-700 rounded-full mb-1"></span>
+                  <span class="h-2 w-12 bg-gray-700 rounded-full"></span>
+                </div>
+                <div class="flex flex-col items-center w-1/2">
+                  <span class="h-2 w-10 bg-gray-700 rounded-full mb-1"></span>
+                  <span class="h-2 w-12 bg-gray-700 rounded-full"></span>
+                </div>
+              </div>
+            </div>
+          }
+        }
+
+        <app-add-customer [ShowModalClient]="showModal" (closeSignal)="showModal = $event" (signalToAlert)="animate()"></app-add-customer>
+        <app-edit-customers (CloseEditCustomer)="showModalEditCustomers = $event" [showModal]="showModalEditCustomers" (signalToModal)="this.animate()"></app-edit-customers>
+
+      </div>
     </div>
-
-    <!-- Footer: Compras / Pagos -->
-    <div class="w-full flex justify-between mt-auto text-sm font-medium text-gray-300 border-t border-divideDM pt-3">
-      <div class="flex flex-col items-center w-1/2 border-r border-divideDM">
-        <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Compras</span>
-        <span class="text-red-400 font-semibold">${{ client.total_sales| number}}</span>
-      </div>
-      <div class="flex flex-col items-center w-1/2">
-        <span class="text-[10px] uppercase tracking-wider text-gray-400 mb-0.5">Pagos</span>
-        <span class="text-green-400 font-semibold">${{ client.total_pays| number}}</span>
-      </div>
-    </div>
-  </div>
-
-    <!-- skeleton loader -->
-    <ng-container *ngIf="!clients">
-      <div *ngFor="let i of [0,1,3,4]" class="bg-transparent rounded-2xl border border-divideDM flex flex-col items-center text-center  p-4 animate-pulse select-none">
-      <!-- Header skeleton -->
-      <div class="w-full flex justify-between text-xs text-gray-600 mb-2">
-        <span class="h-3 w-6 bg-gray-700 rounded-full"></span>
-        <span class="h-3 w-12 bg-gray-700 rounded-full"></span>
-      </div>
-
-      <!-- Avatar skeleton -->
-      <div class="relative mb-3">
-        <div class="w-16 h-16 rounded-full border border-divideDM flex items-center justify-center  bg-gray-700"></div>
-      </div>
-
-      <!-- Nombre skeleton -->
-      <div class="h-2 w-26 bg-gray-700 rounded-full mb-1"></div>
-
-      <!-- Teléfono skeleton -->
-      <div class="flex items-center gap-1 mb-4">
-        <div class="w-3.5 h-2 bg-gray-700 rounded-full opacity-70"></div>
-        <div class="h-3 w-14 bg-gray-700 rounded-full"></div>
-      </div>
-
-      <!-- Footer: Compras / Pagos skeleton -->
-      <div class="w-full flex justify-between mt-auto border-t border-divideDM pt-3">
-        <div class="flex flex-col items-center w-1/2 border-r border-divideDM">
-          <span class="h-2 w-10 bg-gray-700 rounded-full mb-1"></span>
-          <span class="h-2 w-12 bg-gray-700 rounded-full"></span>
-        </div>
-        <div class="flex flex-col items-center w-1/2">
-          <span class="h-2 w-10 bg-gray-700 rounded-full mb-1"></span>
-          <span class="h-2 w-12 bg-gray-700 rounded-full"></span>
-        </div>
-      </div>
-      </div>
-    </ng-container>
-
-    <app-add-customer [ShowModalClient]="showModal" (closeSignal)="showModal = $event" (signalToAlert)="animate()"></app-add-customer>
-    <app-edit-customers (CloseEditCustomer)="showModalEditCustomers = $event" [showModal]="showModalEditCustomers" (signalToModal)="this.animate()"></app-edit-customers>
-
-  </div>
-</div>

@@ -19,10 +19,10 @@
               <button (click)="closeModal()" class="text-gray-400 hover:text-gray-200 transition">✕</button>
             </div>
 
-            
+
             <form class="flex flex-col gap-4">
 
-              
+
               <div>
                 <label class="block text-sm mb-1 text-gray-300">Nombre del producto</label>
                 <input type="text" [(ngModel)]="productName" name="productName" autocomplete="off" (input)="alert=false" class="w-full bg-[#1a2235] text-sm border border-divideDM rounded-md px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600" placeholder="Ej: Sábana Casatex">
@@ -40,11 +40,13 @@
                     <input #dropdownMenu name="clientNamee" [(ngModel)]="client_name"  autocomplete="off" (input)="alert=false" (focus)="showDropDown = true"  placeholder="Escribe un cliente..." class="inline-flex w-max justify-center gap-x-1.5 rounded-md bg-[#1a2235] text-gray-300 px-3 py-2.5 text-sm ring-1 ring-[rgb(51,58,72)] ring-inset cursor-text shadow focus:outline-none focus:ring-2 focus:ring-indigo-600"/>
 
                     <!-- ALERTA -->
-                    <span *ngIf="alert===true"
-                      class="duration-300 px-2 transition-all w-fit ring ring-[#4b1d2c] flex flex-row text-red-400 py-1 justify-center items-center bg-[#341b2a] mt-3 rounded-md">
-                     <svg   viewBox="0 0 20 20" height="20" fill="currentColor" data-slot="icon" aria-hidden="true" class="hwp hxe"><path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
-                      <p class="ml-1.5 text-sm font-thin text-[#ffc9bf] whitespace-nowrap pointer-events-none">Debe completar todos los campos</p>
-                    </span>
+                    @if (alert===true) {
+                      <span
+                        class="duration-300 px-2 transition-all w-fit ring ring-[#4b1d2c] flex flex-row text-red-400 py-1 justify-center items-center bg-[#341b2a] mt-3 rounded-md">
+                        <svg   viewBox="0 0 20 20" height="20" fill="currentColor" data-slot="icon" aria-hidden="true" class="hwp hxe"><path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                        <p class="ml-1.5 text-sm font-thin text-[#ffc9bf] whitespace-nowrap pointer-events-none">Debe completar todos los campos</p>
+                      </span>
+                    }
                   </div>
 
                   <!-- DROPDOWN -->
@@ -52,14 +54,16 @@
                     [ngClass]="{'transition ease-out duration-100 transform opacity-100 scale-100 pointer-events-auto':showDropDown, 'transition ease-in duration-75 transform opacity-0 scale-95 pointer-events-none ':!showDropDown, 'bottom-23!':alert}"
                     role="menu" tabindex="-1"  class="absolute bottom-12 z-10 mt-2 w-auto max-h-45 overflow-hidden overflow-y-auto scroll-transparent origin-bottom rounded-md bg-[#1a2235] text-gray-300 shadow-lg outline-hidden ring-1 ring-[rgb(51,58,72)]">
 
-                    <div *ngIf="clients" role="none">
-                      <ng-container *ngFor="let client of clients | filterClients:client_name">
-                        <button (click)="client_name= client; alert=false" role="menuitem"
-                          class="block w-full px-4 py-2 text-sm text-gray-300 rounded-md cursor-pointer text-start hover:bg-indigo-500 whitespace-nowrap">
-                          {{client | titlecase}}
-                        </button>
-                      </ng-container>
-                    </div>
+                    @if (clients) {
+                      <div role="none">
+                        @for (client of clients | filterClients:client_name; track client) {
+                          <button (click)="client_name= client; alert=false" role="menuitem"
+                            class="block w-full px-4 py-2 text-sm text-gray-300 rounded-md cursor-pointer text-start hover:bg-indigo-500 whitespace-nowrap">
+                            {{client | titlecase}}
+                          </button>
+                        }
+                      </div>
+                    }
                   </div>
 
                 </div>
@@ -68,16 +72,20 @@
               <!-- BOTONES -->
               <div class="flex gap-3 pt-7 flex-row-reverse">
                 <button type="button" (click)="closeModal()"
-                  class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md text-sm font-medium transition">Cancelar</button>
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-md text-sm font-medium transition">Cancelar</button>
 
                 <button  [ngClass]="{'bg-green-600/40! text-white/60! cursor-default! hover:bg-green-600/40! pointer-events-none!':alert}" (click)="submit()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition">
-                  <p *ngIf="Status==='nothing'">Agregar</p>
-                  <div *ngIf="Status === 'loading'">
-                    <div class="flex flex-row justify-center items-center gap-2">
-                       <svg aria-hidden="true" class="w-5 h-5 text-gray-200 animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/></svg>
-                      <span>Cargando...</span>
+                  @if (Status==='nothing') {
+                    <p>Agregar</p>
+                  }
+                  @if (Status === 'loading') {
+                    <div>
+                      <div class="flex flex-row justify-center items-center gap-2">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-200 animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/></svg>
+                        <span>Cargando...</span>
+                      </div>
                     </div>
-                  </div>
+                  }
                 </button>
               </div>
 

@@ -1,7 +1,7 @@
 <div class="font-inter">
   <div role="dialog" aria-modal="true" aria-labelledby="dialog-title"
-       class="relative z-10"
-       [ngClass]="{ 'ease-in duration-100 opacity-100 pointer-events-auto': showModal, 'ease-in duration-200 opacity-0 pointer-events-none': !showModal }">
+    class="relative z-10"
+    [ngClass]="{ 'ease-in duration-100 opacity-100 pointer-events-auto': showModal, 'ease-in duration-200 opacity-0 pointer-events-none': !showModal }">
 
     <!-- Fondo oscuro -->
     <div aria-hidden="true" class="fixed inset-0 bg-black/70 transition-opacity backdrop-blur-[2px]"></div>
@@ -10,7 +10,7 @@
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
       <div class="flex min-h-full items-center justify-center p-4 text-center">
         <div class="relative transform overflow-hidden rounded-xl text-left shadow-xl transition-all w-full max-w-md"
-             [ngClass]="{ 'ease-out duration-300 opacity-100 translate-y-0 scale-100 pointer-events-auto': showModal, 'ease-in duration-200 opacity-0 translate-y-4 scale-95 pointer-events-none': !showModal }">
+          [ngClass]="{ 'ease-out duration-300 opacity-100 translate-y-0 scale-100 pointer-events-auto': showModal, 'ease-in duration-200 opacity-0 translate-y-4 scale-95 pointer-events-none': !showModal }">
 
           <!-- Contenido principal -->
           <div class="bg-[#0e1624] text-gray-200 p-5 flex flex-col gap-5 rounded-xl shadow-lg border border-divideDM">
@@ -37,47 +37,53 @@
               <div>
                 <label class="block text-sm mb-1 text-gray-300">Nombre</label>
                 <input (input)="ckeckData()"  type="text" [(ngModel)]="customerName" class="w-full bg-[#1a2235] placeholder:text-sm border border-divideDM rounded-md px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-text" placeholder="Ej: María Pérez">
-                       
+
               </div>
 
               <div>
                 <label class="block text-sm mb-1 text-gray-300">Teléfono</label>
-                <input (input)="ckeckData(); alert=false" type="text" inputmode="numeric" pattern="[0-9]{0,10}" [maxLength]="10" [(ngModel)]="tel" 
-                       class="w-full bg-[#1a2235] input-no-spin placeholder:text-sm border border-divideDM rounded-md px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-text"
-                       placeholder="Ej: 11 2345 6789">
-              </div>
-
-              <!-- ALERTA -->
-              <span *ngIf="alert === true" class="duration-300 px-2 transition-all w-fit ring ring-[#4b1d2c] flex flex-row text-red-400 py-1 justify-center items-center bg-[#341b2a] mt-2 rounded-md">
-                <svg viewBox="0 0 20 20" height="20" fill="currentColor" aria-hidden="true">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"/>
-                </svg>
-                <p class="ml-1.5 text-sm font-thin text-[#ffc9bf] whitespace-nowrap">{{alertMsg}}</p>
-              </span>
-            </div>
-
-            <!-- BOTONES -->
-            <div class="flex gap-3 pt-3">
-              <button [disabled]="!disableBtn" (click)="submit()" [ngClass]="{'bg-green-600/40 text-white/60 cursor-default hover:bg-green-600/40!':!disableBtn}" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition cursor-pointer">
-                <p *ngIf="Status==='nothing'">Guardar cambios</p>
-                <div *ngIf="Status === 'loading'" class="flex flex-row justify-center items-center gap-2">
-                  <svg aria-hidden="true" class="w-5 h-5 text-gray-200 animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-                  </svg>
-                  <span>Cargando...</span>
+                <input (input)="ckeckData(); alert=false" type="text" inputmode="numeric" pattern="[0-9]{0,10}" [maxLength]="10" [(ngModel)]="tel"
+                  class="w-full bg-[#1a2235] input-no-spin placeholder:text-sm border border-divideDM rounded-md px-3 py-2 text-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-text"
+                  placeholder="Ej: 11 2345 6789">
                 </div>
-              </button>
 
-              <button (click)="closeModal()" class="flex-1 bg-gray-700 hover:bg-gray-800 text-white py-2 rounded-md text-sm font-medium transition cursor-pointer">
-                Cancelar
-              </button>
+                <!-- ALERTA -->
+                @if (alert === true) {
+                  <span class="duration-300 px-2 transition-all w-fit ring ring-[#4b1d2c] flex flex-row text-red-400 py-1 justify-center items-center bg-[#341b2a] mt-2 rounded-md">
+                    <svg viewBox="0 0 20 20" height="20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"/>
+                      </svg>
+                      <p class="ml-1.5 text-sm font-thin text-[#ffc9bf] whitespace-nowrap">{{alertMsg}}</p>
+                    </span>
+                  }
+                </div>
+
+                <!-- BOTONES -->
+                <div class="flex gap-3 pt-3">
+                  <button [disabled]="!disableBtn" (click)="submit()" [ngClass]="{'bg-green-600/40 text-white/60 cursor-default hover:bg-green-600/40!':!disableBtn}" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-md text-sm font-medium transition cursor-pointer">
+                    @if (Status==='nothing') {
+                      <p>Guardar cambios</p>
+                    }
+                    @if (Status === 'loading') {
+                      <div class="flex flex-row justify-center items-center gap-2">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-200 animate-spin fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                        </svg>
+                        <span>Cargando...</span>
+                      </div>
+                    }
+                  </button>
+
+                  <button (click)="closeModal()" class="flex-1 bg-gray-700 hover:bg-gray-800 text-white py-2 rounded-md text-sm font-medium transition cursor-pointer">
+                    Cancelar
+                  </button>
+                </div>
+
+              </div> <!-- fin bg -->
             </div>
-
-          </div> <!-- fin bg -->
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

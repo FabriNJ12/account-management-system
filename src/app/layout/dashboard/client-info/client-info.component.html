@@ -18,8 +18,12 @@
                 <h2 id="dialog-title" class="text-lg font-semibold text-white">{{ client?.name | titlecase }}</h2>
                 <span class="text-sm text-gray-400 flex truncate justify-start items-center flex-row"> Deuda actual:
                   <!-- skeleton loader -->
-                  <div *ngIf="!history" class="h-4 ml-1 w-4/4 bg-gray-700 rounded-full animate-pulse"></div>
-                  <span *ngIf="history" class="text-red-400 font-medium ml-1">{{ debt$ | async | currency:'ARS' }}</span>
+                  @if (!history) {
+                    <div class="h-4 ml-1 w-4/4 bg-gray-700 rounded-full animate-pulse"></div>
+                  }
+                  @if (history) {
+                    <span class="text-red-400 font-medium ml-1">{{ debt$ | async | currency:'ARS' }}</span>
+                  }
                 </span>
               </div>
               <button (click)="closeModal()" class="text-gray-400 hover:text-gray-200">✕</button>
@@ -43,39 +47,50 @@
                 </thead>
                 <tbody>
                   <!-- skeleton loader -->
-                  <tr *ngIf="!history" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
-                    <td class="px-2" colspan="3"><div class="h-5 w-4/4 bg-gray-700  rounded-full animate-pulse mt-2"></div></td>
-                  </tr>
+                  @if (!history) {
+                    <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
+                      <td class="px-2" colspan="3"><div class="h-5 w-4/4 bg-gray-700  rounded-full animate-pulse mt-2"></div></td>
+                    </tr>
+                  }
 
-                  <tr *ngIf="!history" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
-                    <td class="px-2" colspan="3"><div class="h-5 w-2/4 bg-gray-700  rounded-full animate-pulse mt-1"></div></td>
-                  </tr>
+                  @if (!history) {
+                    <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
+                      <td class="px-2" colspan="3"><div class="h-5 w-2/4 bg-gray-700  rounded-full animate-pulse mt-1"></div></td>
+                    </tr>
+                  }
 
-                  <tr *ngIf="!history" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
-                    <td class="px-2" colspan="3"><div class="h-5 w-1/4 bg-gray-700  rounded-full animate-pulse mt-1"></div></td>
-                  </tr>
+                  @if (!history) {
+                    <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
+                      <td class="px-2" colspan="3"><div class="h-5 w-1/4 bg-gray-700  rounded-full animate-pulse mt-1"></div></td>
+                    </tr>
+                  }
 
-                  <tr *ngIf="!history" class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
-                    <td class="px-2" colspan="3"><div class="h-5 w-3/4 bg-gray-700  rounded-full animate-pulse mt-1 mb-2"></div></td>
-                  </tr>
+                  @if (!history) {
+                    <tr class="hover:bg-accentDM/35 cursor-pointer transition-colors duration-200 *:border-b *:border-accentDM">
+                      <td class="px-2" colspan="3"><div class="h-5 w-3/4 bg-gray-700  rounded-full animate-pulse mt-1 mb-2"></div></td>
+                    </tr>
+                  }
 
-                  <ng-container *ngFor="let item of history">
+                  @for (item of history; track item) {
                     <tr (click)="GetInfoRow(item);showModalRowInfo = !showModalRowInfo" class="hover:bg-[#2a2c31]/70 transition cursor-pointer">
                       <td class="px-3 py-2 text-gray-400 truncate select-none">{{ item.date | date:'d-MMM' }}</td>
                       <td class="px-3 py-2 text-white truncate select-none">{{ item.description | titlecase }}</td>
-                      <td *ngIf="item.type === 'Venta'" class="px-3 py-2 text-right text-red-400 font-medium">+${{ item.amount |number}}</td>
-                      <td *ngIf="item.type === 'Pago'" class="px-3 py-2 text-right text-green-400 font-medium">-${{ item.amount |number }}</td>
+                      @if (item.type === 'Venta') {
+                        <td class="px-3 py-2 text-right text-red-400 font-medium">+${{ item.amount |number}}</td>
+                      }
+                      @if (item.type === 'Pago') {
+                        <td class="px-3 py-2 text-right text-green-400 font-medium">-${{ item.amount |number }}</td>
+                      }
                     </tr>
-                  </ng-container>
+                  }
 
-                  <ng-container *ngIf="history?.length === 0">
+                  @if (history?.length === 0) {
                     <tr>
                       <td colspan="3">
                         <p class="text-center py-2 text-white/50">Sin movimientos</p>
                       </td>
                     </tr>
-                   
-                  </ng-container>
+                  }
                 </tbody>
               </table>
             </div>
