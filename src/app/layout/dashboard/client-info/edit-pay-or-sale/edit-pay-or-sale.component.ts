@@ -83,7 +83,7 @@ export class EditPayOrSaleComponent {
 
     if (
       !this.newData.description ||
-      this.newData.description.length < 4 ||
+      this.newData.description.length < 3 ||
       !this.newData.amount ||
       this.newData.amount.toString().length < 3 ||
       this.newData.amount === 0
