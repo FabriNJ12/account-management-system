@@ -1,5 +1,5 @@
 <div class="font-inter">
-  <div role="dialog" aria-modal="true" aria-labelledby="dialog-title"
+  <div  (click)="closeModal()" (touchstart)="closeModal()" role="dialog" aria-modal="true" aria-labelledby="dialog-title"
     class="relative z-10"
     [ngClass]="{'ease-in duration-100 opacity-100 pointer-events-auto':ShowModalPay, 'ease-in duration-200 opacity-0 pointer-events-none':!ShowModalPay }">
 
@@ -8,7 +8,7 @@
 
     <div r class="fixed inset-0 z-10 w-screen overflow-y-auto">
       <div class="flex min-h-full items-center justify-center p-4 text-center">
-        <div  class="relative transform overflow-hidden rounded-xl text-left shadow-xl transition-all w-full max-w-md"
+        <div #modalBox (click)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()"  class="relative transform overflow-hidden rounded-xl text-left shadow-xl transition-all w-full max-w-md"
           [ngClass]="{'ease-out duration-300 opacity-100 translate-y-0 scale-100 pointer-events-auto':ShowModalPay, 'ease-in duration-200 opacity-0 translate-y-4 scale-95 pointer-events-none':!ShowModalPay }">
 
           <div  class="border border-divideDM bg-[#0e1624] text-gray-200 p-6 flex flex-col gap-6 rounded-xl shadow-lg">
@@ -43,7 +43,7 @@
                       <path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
                     </button>
 
-                    @if (alert===true) {
+                    @if (alert === true) {
                       <span class="duration-300 px-2 transition-all w-fit ring ring-[#4b1d2c] flex flex-row text-red-400  py-1 justify-center items-center bg-[#341b2a] mt-3 rounded-md"><svg   viewBox="0 0 20 20" height="20" fill="currentColor" data-slot="icon" aria-hidden="true" class="hwp hxe"><path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
                       <p class=" ml-1.5 text-sm font-thin text-[#ffc9bf] whitespace-nowrap pointer-events-none">{{AlertMsg}}</p>
                     </span>

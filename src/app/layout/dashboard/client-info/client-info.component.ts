@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   Output,
@@ -37,6 +38,7 @@ export class ClientInfoComponent {
   /** ----------- ViewChilds ----------- **/
   @ViewChild(AddPayComponent) addPay!: AddPayComponent;
   @ViewChild(AddSaleComponent) addSale!: AddPayComponent;
+  @ViewChild('modalBox') modalBox!: ElementRef;
 
   /** ----------- Variables de estado ----------- **/
   ShowModalPay: boolean = false;
@@ -76,6 +78,14 @@ export class ClientInfoComponent {
   reloadComponent(): void {
     this.realoadSignal.emit();
   }
+
+  onClickOutside(event: MouseEvent) {
+  if (this.ShowModal && !this.modalBox.nativeElement.contains(event.target)) {
+    this.closeModal();
+  }
+}
+
+ 
 
   /** ----------- Lógica principal ----------- **/
   async getData(data: Clients) {

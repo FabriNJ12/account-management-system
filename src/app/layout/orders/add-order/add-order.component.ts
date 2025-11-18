@@ -20,7 +20,7 @@ type Status = 'loading' | 'nothing' | 'error' | 'success';
   pure: true,
 })
 export class FilterClientsPipe implements PipeTransform {
-  transform(clients: string[] , client_name: string): string[] {
+  transform(clients: string[], client_name: string): string[] {
     if (!client_name) return clients;
 
     client_name = client_name.toLowerCase();
@@ -35,7 +35,7 @@ export class FilterClientsPipe implements PipeTransform {
   templateUrl: './add-order.component.html',
   styleUrl: './add-order.component.css',
 })
-export class AddOrderComponent  {
+export class AddOrderComponent {
   /* ===========================
         INPUTS / OUTPUTS
   ============================ */
@@ -54,7 +54,7 @@ export class AddOrderComponent  {
   ============================ */
   showDropDown: boolean = false;
 
-  clients: string[] | null = null
+  clients: string[] | null = null;
 
   productName: string = '';
   alert: boolean = false;
@@ -67,9 +67,14 @@ export class AddOrderComponent  {
               MÉTODOS
   ============================ */
 
-  constructor(private addOrderService: AddOrderService, private ordersService:OrdersService) {}
+  constructor(
+    private addOrderService: AddOrderService,
+    private ordersService: OrdersService
+  ) {}
 
   closeModal() {
+    if (this.showDropDown) return;
+
     this.showModal = false;
     this.signalToClose.emit(false);
     setTimeout(() => {
@@ -99,7 +104,7 @@ export class AddOrderComponent  {
 
   private callBD() {
     if (!this.order) return;
-    this.Status = 'loading'
+    this.Status = 'loading';
 
     this.addOrderService.addOrder(this.order).subscribe({
       error: (err) => {
@@ -111,7 +116,7 @@ export class AddOrderComponent  {
           this.Status = 'nothing';
           this.closeModal();
           this.signalToNotify.emit();
-          this.updateOrders.emit(data)
+          this.updateOrders.emit(data);
         }, 400);
       },
     });

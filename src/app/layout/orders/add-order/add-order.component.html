@@ -1,5 +1,5 @@
 <div class="font-inter">
-  <div role="dialog" aria-modal="true" aria-labelledby="dialog-title"
+  <div (click)="closeModal()" (touchstart)="closeModal()"  role="dialog" aria-modal="true" aria-labelledby="dialog-title"
     class="relative z-10"
     [ngClass]="{'ease-in duration-100 opacity-100 pointer-events-auto':showModal, 'ease-in duration-200 opacity-0 pointer-events-none':!showModal }">
 
@@ -8,7 +8,7 @@
 
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
       <div class="flex min-h-full items-center justify-center p-4 text-center">
-        <div class="relative transform overflow-hidden rounded-xl text-left shadow-xl transition-all w-full max-w-md"
+        <div (click)="$event.stopPropagation()" (touchstart)="$event.stopPropagation()" class="relative transform overflow-hidden rounded-xl text-left shadow-xl transition-all w-full max-w-md"
           [ngClass]="{'ease-out duration-300 opacity-100 translate-y-0 scale-100 pointer-events-auto':showModal, 'ease-in duration-200 opacity-0 translate-y-4 scale-95 pointer-events-none':!showModal }">
 
           <div class="border border-divideDM bg-[#0e1624] text-gray-200 p-6 flex flex-col gap-6 rounded-xl shadow-lg">
@@ -57,7 +57,7 @@
                     @if (clients) {
                       <div role="none">
                         @for (client of clients | filterClients:client_name; track client) {
-                          <button (click)="client_name= client; alert=false" role="menuitem"
+                          <button (click)="client_name= client; alert=false; showDropDown=false" role="menuitem"
                             class="block w-full px-4 py-2 text-sm text-gray-300 rounded-md cursor-pointer text-start hover:bg-indigo-500 whitespace-nowrap">
                             {{client | titlecase}}
                           </button>

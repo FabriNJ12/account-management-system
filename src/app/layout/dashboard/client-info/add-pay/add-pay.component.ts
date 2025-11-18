@@ -32,6 +32,7 @@ export class AddPayComponent {
   /* ---------- ViewChilds ---------- */
   @ViewChild('dropdownMenu') dropdownMenu!: ElementRef;
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
+  @ViewChild('modalBox') modalBox!: ElementRef;
 
   /* ---------- Data ---------- */
   client: Clients | null = null;
@@ -62,6 +63,7 @@ export class AddPayComponent {
 
   /* ---------- UI Methods ---------- */
   closeModal(): void {
+    if(this.showDropDown) return
     this.ShowModalPay = false;
     this.sendSignal.emit(false);
     this.reset();
@@ -147,4 +149,7 @@ export class AddPayComponent {
       }, 5000);
     }
   }
+
+
+  
 }

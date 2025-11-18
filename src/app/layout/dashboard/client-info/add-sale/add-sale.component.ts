@@ -30,6 +30,7 @@ export class AddSaleComponent {
   Status: Status = 'nothing';
 
   closeModal() {
+
     this.ShowModalSale = false;
     this.closeSignal.emit(false);
     setTimeout(() => {
@@ -38,7 +39,7 @@ export class AddSaleComponent {
   }
 
   private reset(): void {
-    this.price = 0;
+    this.price = null;
     this.name = '';
     this.description = '';
     this.alert = false;
@@ -55,7 +56,7 @@ export class AddSaleComponent {
   }
 
   async submit(): Promise<void> {
-    // ✅ Preparar y validar los datos antes de enviar
+    //  Preparar y validar los datos antes de enviar
     const saleInfo = this.validateAndPrepareSale();
     if (!saleInfo || !this.client) return;
 

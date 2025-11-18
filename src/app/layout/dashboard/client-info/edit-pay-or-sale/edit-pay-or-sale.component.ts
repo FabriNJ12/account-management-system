@@ -51,6 +51,8 @@ export class EditPayOrSaleComponent {
 
   /** Cierra la modal y notifica al componente padre */
   closeModal(): void {
+    if (this.showDropDown) return;
+
     this.showMovementModal = false;
     this.signalOut.emit(this.showMovementModal);
     setTimeout(() => {
