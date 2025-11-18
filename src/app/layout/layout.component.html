@@ -1,7 +1,7 @@
-<div class="flex flex-col md:flex-row font-sans w-screen divide-x h-dvh overflow-hidden  ">
+<div class="flex flex-col md:flex-row font-sans w-screen divide-x h-dvh overflow-hidden   ">
 
   <!-- ASIDE NAVBAR ESCRITORIO -->
-  <aside [ngClass]="{'w-[60px]':!expandSideBar, 'w-[220px] lg:w-60 xl:w-[280px]':expandSideBar}" class="md:flex flex-col hidden bg-[#0e1624] items-center justify-between shadow-md px-3 gap-5 transition-all duration-400 ">
+  <aside [ngClass]="{'w-[60px]':!expandSideBar, 'w-[220px] lg:w-60 xl:w-[280px]':expandSideBar}" class="md:flex flex-col hidden border-r border-divideDM bg-[#0e1624] items-center justify-between shadow-md px-3 gap-5 transition-all duration-400 ">
 
     <main class="w-full flex flex-col ">
 
@@ -70,7 +70,7 @@
   <main  class="flex-1 overflow-x-hidden relative">
 
     <!-- ASIDE NAVBAR MOBILE -->
-    <aside [ngClass]="{'w-0 px-0':!menuOpen, 'w-60 px-3':menuOpen}"  class="fixed top-0 left-0 h-dvh  bg-[#0e1624] border-r border-divideDM shadow-md z-50 transform transition-all duration-300 will-change-transform flex flex-col justify-between items-center px-3 gap-5">
+    <aside [ngClass]="{'w-0 px-0':!menuOpen, 'w-60 px-3':menuOpen}"  class="fixed top-0 left-0 h-dvh  bg-[#0e1624] border-r  border-divideDM shadow-md z-50 transform transition-all duration-300 will-change-transform flex flex-col justify-between items-center px-3 gap-5">
 
       <main class="w-full flex flex-col mt-20">
 

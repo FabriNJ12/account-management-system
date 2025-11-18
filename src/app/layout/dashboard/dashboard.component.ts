@@ -4,10 +4,20 @@ import { GetUsersService } from '../../services/getUsers/get-users.service';
 import { Clients } from '../../interfaces/clients';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
+import { CardsComponent } from './cards/cards.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ClientInfoComponent, CommonModule, FormsModule],
+  imports: [
+    ClientInfoComponent,
+    CommonModule,
+    FormsModule,
+    ButtonModule,
+    CarouselModule,
+    CardsComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -24,6 +34,7 @@ export class DashboardComponent implements OnInit {
 
   // Referencia al componente hijo
   @ViewChild(ClientInfoComponent) client!: ClientInfoComponent;
+  @ViewChild(CardsComponent) cardComponent!: CardsComponent;
 
   constructor(private getUsers: GetUsersService) {}
 
@@ -34,12 +45,14 @@ export class DashboardComponent implements OnInit {
   /** Recarga la lista completa de clientes desde el servicio */
   async reload(): Promise<void> {
     this.clientsOriginal = await this.getUsers.getClients();
-    console.log(this.clientsOriginal)
     if (this.clientsOriginal.length === 0) {
       this.msg = true;
     }
     this.clientsFiltered = this.clientsOriginal;
-    this.loading = false
+    this.loading = false;
+
+    this.cardComponent.getDetb();
+    this.cardComponent.getOlderPayment();
   }
 
   /** Abre el modal y envía los datos del cliente seleccionado */

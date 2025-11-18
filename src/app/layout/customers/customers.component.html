@@ -42,7 +42,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon pointer-events-none *:pointer-events-none select-none  icon-tabler icons-tabler-outline icon-tabler-sort-z-a"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 8h4l-4 8h4" /><path d="M16 16v-6a2 2 0 1 1 4 0v6" /><path d="M16 13h4" /><path d="M11 12h2" /></svg>
           </button>
         </div>
-      </div>
+    </div>
 
 
     </header>
@@ -58,8 +58,7 @@
 
     <!-- GRID -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      @if (clients) {
-        @if (clients.length < 1) {
+        @if (clients !== null && clients.length < 1) {
           <div class="col-span-full flex flex-col items-center justify-center py-16 px-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex justify-center items-center mr-3 text-gray-500 mb-4 opacity-50 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
@@ -67,7 +66,7 @@
             <p class="text-gray-400 font-medium mb-1">Sin resultados</p>
           </div>
         }
-      }
+      
 
       <!-- CARD -->
       @for (client of clients; track client; let i = $index) {
