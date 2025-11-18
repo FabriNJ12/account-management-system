@@ -4,19 +4,16 @@ import { GetUsersService } from '../../services/getUsers/get-users.service';
 import { Clients } from '../../interfaces/clients';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CarouselModule } from 'primeng/carousel';
 import { CardsComponent } from './cards/cards.component';
+
+
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     ClientInfoComponent,
     CommonModule,
-    FormsModule,
-    ButtonModule,
-    CarouselModule,
-    CardsComponent,
+    FormsModule, CardsComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
