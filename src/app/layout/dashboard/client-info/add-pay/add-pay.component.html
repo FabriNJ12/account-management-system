@@ -37,7 +37,7 @@
                 <p class="block text-sm font-medium text-gray-300 mb-1">Método de pago</p>
                 <div class="relative inline-block text-left ">
                   <div class="flex flex-col gap-1.5">
-                    <button (click)="showDropDown=!showDropDown; $event.stopPropagation();"  id="menu-button"  aria-expanded="true"  class="inline-flex w-max justify-center gap-x-1.5 rounded-md bg-[#1a2235] text-gray-300 px-3 py-2 text-sm  ring-1 ring-[rgb(51,58,72)] ring-inset  cursor-pointer shadow  ">
+                    <button (click)="showDropDown=!showDropDown; $event.stopPropagation();" [ngClass]="{'ring-indigo-600! outline-indigo-600 outline-1':showDropDown}"  id="menu-button"  aria-expanded="true"  class="inline-flex w-max justify-center gap-x-1.5 rounded-md bg-[#1a2235] text-gray-300 px-3 py-2 text-sm  ring-1 ring-[rgb(51,58,72)] ring-inset  cursor-pointer shadow  ">
                       {{reasonSelected | titlecase}}
                       <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="-mr-1 size-5 text-gray-400">
                       <path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
@@ -50,7 +50,7 @@
                   }
                 </div>
 
-                <div #dropdownMenu [ngClass]="{'transition ease-out duration-100 transform opacity-100 scale-100 pointer-events-auto':showDropDown, 'transition ease-in duration-75 transform opacity-0 scale-95 pointer-events-none ':!showDropDown}" role="menu" tabindex="-1" aria-labelledby="menu-button" aria-orientation="vertical" class="absolute top-9 z-10 mt-2 w-auto origin-top-left rounded-md bg-[#1a2235] text-gray-300 shadow-lg outline-hidden ring-1 ring-[rgb(51,58,72)]">
+                <div #dropdownMenu [ngClass]="{'transition ease-out duration-100 transform opacity-100 scale-100 pointer-events-auto':showDropDown, 'transition ease-in duration-75 transform opacity-0 scale-95 pointer-events-none ':!showDropDown}" role="menu" tabindex="-1" aria-labelledby="menu-button" aria-orientation="vertical" class="absolute top-9 z-10 mt-2 w-auto origin-top rounded-md bg-[#1a2235] text-gray-300 shadow-lg outline-hidden ring-1 ring-[rgb(51,58,72)]">
                   <div role="none" class=" ">
                     <!-- Active: "bg-gray-100 text-gray-900 outline-hidden", Not Active: "text-gray-700" -->
                     @for ( method of methods; track  method) {

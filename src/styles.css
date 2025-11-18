@@ -64,3 +64,10 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+@layer base {
+  ::placeholder {
+    @apply text-gray-500;
+    @apply text-sm
+  }
+}
